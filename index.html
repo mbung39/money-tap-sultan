@@ -80,6 +80,7 @@ function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractio
 
 auth.getRedirectResult().then().catch(function(error) { console.log(error); });
 
+// INI BAGIAN YG UDAH GUE FIX BIAR MUNCUL LOGOUT + NAMA
 auth.onAuthStateChanged(user => {
   if(user){
     userId = user.uid;
