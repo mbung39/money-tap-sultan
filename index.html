@@ -78,17 +78,8 @@ var autoWaktu = 0;
 
 function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
 
-// FIX 1: NANGKEP HASIL REDIRECT + RELOAD
-auth.getRedirectResult().then((result) => {
-  if (result.user) {
-    console.log("Login sukses:", result.user.displayName);
-    location.reload(); // PAKSA RELOAD BIAR MUNCUL NAMA
-  }
-}).catch(function(error) { 
-  if(error.code) console.log("Error Login:", error); 
-});
+// HAPUS getRedirectResult, GA DIPAKE LAGI
 
-// FIX 2: UPDATE UI PAS LOGIN/LOGOUT
 auth.onAuthStateChanged(user => {
   if(user){
     userId = user.uid;
@@ -104,13 +95,18 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-// FIX 3: TAMBAH SCOPE EMAIL + PROFILE
+// INI YG BARU: PAKE POPUP BIAR GA KABUR
 function loginGoogle(){
-  if(userId){ auth.signOut(); return; }
+  if(userId){ 
+    auth.signOut(); 
+    return; 
+  }
   var provider = new firebase.auth.GoogleAuthProvider();
   provider.addScope('profile');
   provider.addScope('email');
-  auth.signInWithRedirect(provider);
+  auth.signInWithPopup(provider).catch(function(error) {
+    alert("Login gagal: " + error.message);
+  });
 }
 
 function loadData(){
