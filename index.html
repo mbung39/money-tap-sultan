@@ -78,7 +78,6 @@ var autoWaktu = 0;
 
 function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
 
-// NANGKEP HASIL LOGIN DARI REDIRECT
 auth.getRedirectResult().then().catch(function(error) { console.log(error); });
 
 auth.onAuthStateChanged(user => {
@@ -99,7 +98,7 @@ auth.onAuthStateChanged(user => {
 function loginGoogle(){
   if(userId){ auth.signOut(); return; }
   var provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithRedirect(provider); // PAKAI REDIRECT BIAR JALAN DI HP
+  auth.signInWithRedirect(provider);
 }
 
 function loadData(){
