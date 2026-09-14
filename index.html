@@ -21,7 +21,7 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 .iklan-box2{width:100%; max-width:360px; height:50px; background:#000; border:2px dashed lime; border-radius:10px; margin:10px auto 15px; display:flex; justify-content:center; align-items:center; color:lime; font-size:11px;}
 #btnAuto{width:90%; max-width:320px; padding:16px; font-size:17px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #00ff00, #00aa00); color:#000; animation: kedip 1.5s infinite;}
 #btnAuto.aktif{background:#002200; color:lime; animation:none; border:2px solid lime; box-shadow:0 0 15px lime;}
-#btnLogin{background:#4285F4; color:#fff; padding:10px 20px; border:0; border-radius:10px; font-weight:bold; margin-bottom:10px; width:200px;}
+#btnLogin, #btnLogin2{background:#4285F4; color:#fff; padding:10px 20px; border:0; border-radius:10px; font-weight:bold; margin:5px; width:200px;}
 .money{position:fixed; font-size:26px; animation:muncrat 0.8s; pointer-events:none; z-index:999;}
 @keyframes muncrat{0%{opacity:1; transform:scale(0.5)} 100%{opacity:0; transform:translateY(-120px) scale(1.4)}}
 .uang-terbang{position:fixed; font-size:28px; bottom:-60px; animation: naikTurun 4s ease-in-out infinite; pointer-events:none; z-index:1; opacity:0.6;}
@@ -33,7 +33,8 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 
 <div class="uang-terbang" style="left:10%;">💸</div><div class="uang-terbang" style="left:50%;">💵</div><div class="uang-terbang" style="left:90%;">🪙</div>
 
-<button id="btnLogin" onclick="loginGoogle()">LOGIN GOOGLE</button>
+<button id="btnLogin" onclick="loginPopup()">LOGIN GOOGLE</button><br>
+<button id="btnLogin2" onclick="loginRedirect()" style="background:#DB4437; font-size:12px;">LOGIN GOOGLE 2</button>
 <div id="userInfo" style="color:gold; font-size:12px; margin-bottom:10px;">Belum Login</div>
 
 <h1>💸 MONEY TAP SULTAN 💸</h1>
@@ -78,35 +79,41 @@ var autoWaktu = 0;
 
 function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
 
-// HAPUS getRedirectResult, GA DIPAKE LAGI
+auth.getRedirectResult().then((result) => {
+  if (result.user) { location.reload(); }
+}).catch(function(error) {});
 
 auth.onAuthStateChanged(user => {
   if(user){
     userId = user.uid;
     document.getElementById('btnLogin').innerText = 'LOGOUT';
+    document.getElementById('btnLogin2').style.display = 'none';
     document.getElementById('userInfo').innerText = 'Halo, ' + user.displayName;
     loadData();
   }else{
     userId = null;
     document.getElementById('btnLogin').innerText = 'LOGIN GOOGLE';
+    document.getElementById('btnLogin2').style.display = 'inline-block';
     document.getElementById('userInfo').innerText = 'Belum Login';
     koin = 0; hist = [];
     updateUI();
   }
 });
 
-// INI YG BARU: PAKE POPUP BIAR GA KABUR
-function loginGoogle(){
-  if(userId){ 
-    auth.signOut(); 
-    return; 
-  }
+// TOMBOL 1: POPUP
+function loginPopup(){
+  if(userId){ auth.signOut(); return; }
   var provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope('profile');
-  provider.addScope('email');
   auth.signInWithPopup(provider).catch(function(error) {
-    alert("Login gagal: " + error.message);
+    alert("Popup gagal. Coba tombol LOGIN GOOGLE 2");
   });
+}
+
+// TOMBOL 2: REDIRECT CADANGAN
+function loginRedirect(){
+  if(userId){ auth.signOut(); return; }
+  var provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithRedirect(provider);
 }
 
 function loadData(){
