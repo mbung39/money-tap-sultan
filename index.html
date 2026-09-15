@@ -23,31 +23,41 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 #btnAuto.aktif{background:#002200; color:lime; animation:none; border:2px solid lime; box-shadow:0 0 15px lime;}
 #btnLogin, #btnLogin2{background:#4285F4; color:#fff; padding:10px 20px; border:0; border-radius:10px; font-weight:bold; margin:5px; width:200px;}
 
-/* ANIMASI BARU GELEMBUNG */
-.money{position:fixed; font-size:26px; animation:muncrat 1s ease-out forwards; pointer-events:none; z-index:999;}
+/* ANIMASI HUJAN UANG CEPAT */
+.money{position:fixed; font-size:26px; animation:muncrat 0.7s ease-out forwards; pointer-events:none; z-index:999;}
 @keyframes muncrat{
- 0%{opacity:1; transform:scale(0.5) translateY(0)}
- 100%{opacity:0; transform:scale(1.2) translateY(-150px)}
+ 0%{opacity:1; transform:scale(0.3) translateY(0) rotate(0deg)}
+ 100%{opacity:0; transform:scale(1.5) translateY(-200px) rotate(720deg)}
 }
 
-.uang-terbang{position:fixed; font-size:28px; bottom:-60px; pointer-events:none; z-index:1; opacity:0.5;}
-/* Gerakan gelembung naik + goyang kiri kanan + muter */
+.uang-terbang{position:fixed; font-size:24px; bottom:-60px; pointer-events:none; z-index:1; opacity:0.4;}
+/* Gerakan gelembung 2x lebih cepat + lebih banyak */
 @keyframes naikGoyang {
   0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0}
-  10%{opacity:0.6}
- 50%{transform:translateY(-300px) translateX(40px) rotate(180deg)}
- 100%{transform:translateY(-700px) translateX(-40px) rotate(360deg); opacity:0}
+ 10%{opacity:0.7}
+ 50%{transform:translateY(-400px) translateX(var(--x)) rotate(360deg)}
+ 100%{transform:translateY(-900px) translateX(calc(var(--x) * -1)) rotate(720deg); opacity:0}
 @keyframes kedip{0%,100%{opacity:1;} 50%{opacity:0.7;}}
 </style>
 </head>
 <body>
 
-<!-- GELEMBUNG BACKGROUND ACAK -->
-<div class="uang-terbang" style="left:10%; animation: naikGoyang 5s ease-in infinite; animation-delay:0s;">💸</div>
-<div class="uang-terbang" style="left:30%; animation: naikGoyang 7s ease-in infinite; animation-delay:1s;">💵</div>
-<div class="uang-terbang" style="left:60%; animation: naikGoyang 6s ease-in infinite; animation-delay:2s;">🪙</div>
-<div class="uang-terbang" style="left:80%; animation: naikGoyang 8s ease-in infinite; animation-delay:0.5s;">💸</div>
-<div class="uang-terbang" style="left:45%; animation: naikGoyang 9s ease-in infinite; animation-delay:3s;">💵</div>
+<!-- 15 GELEMBUNG HUJAN UANG -->
+<div class="uang-terbang" style="left:5%; --x:50px; animation: naikGoyang 3s linear infinite; animation-delay:0s;">💸</div>
+<div class="uang-terbang" style="left:15%; --x:-40px; animation: naikGoyang 2.5s linear infinite; animation-delay:0.3s;">💵</div>
+<div class="uang-terbang" style="left:25%; --x:60px; animation: naikGoyang 3.5s linear infinite; animation-delay:0.6s;">🪙</div>
+<div class="uang-terbang" style="left:35%; --x:-30px; animation: naikGoyang 2.8s linear infinite; animation-delay:0.9s;">💸</div>
+<div class="uang-terbang" style="left:45%; --x:45px; animation: naikGoyang 3.2s linear infinite; animation-delay:1.2s;">💵</div>
+<div class="uang-terbang" style="left:55%; --x:-55px; animation: naikGoyang 2.6s linear infinite; animation-delay:0.2s;">🪙</div>
+<div class="uang-terbang" style="left:65%; --x:35px; animation: naikGoyang 3.8s linear infinite; animation-delay:0.5s;">💸</div>
+<div class="uang-terbang" style="left:75%; --x:-45px; animation: naikGoyang 2.9s linear infinite; animation-delay:0.8s;">💵</div>
+<div class="uang-terbang" style="left:85%; --x:50px; animation: naikGoyang 3.3s linear infinite; animation-delay:1.1s;">🪙</div>
+<div class="uang-terbang" style="left:10%; --x:-35px; animation: naikGoyang 2.7s linear infinite; animation-delay:1.4s;">💸</div>
+<div class="uang-terbang" style="left:50%; --x:60px; animation: naikGoyang 3.6s linear infinite; animation-delay:0.1s;">💵</div>
+<div class="uang-terbang" style="left:90%; --x:-50px; animation: naikGoyang 3.1s linear infinite; animation-delay:0.4s;">🪙</div>
+<div class="uang-terbang" style="left:20%; --x:40px; animation: naikGoyang 2.4s linear infinite; animation-delay:0.7s;">💸</div>
+<div class="uang-terbang" style="left:70%; --x:-60px; animation: naikGoyang 3.4s linear infinite; animation-delay:1s;">💵</div>
+<div class="uang-terbang" style="left:40%; --x:55px; animation: naikGoyang 2.8s linear infinite; animation-delay:1.3s;">🪙</div>
 
 <button id="btnLogin" onclick="loginPopup()">LOGIN GOOGLE</button><br>
 <button id="btnLogin2" onclick="loginRedirect()" style="background:#DB4437; font-size:12px;">LOGIN GOOGLE 2</button>
@@ -154,26 +164,26 @@ document.getElementById('tap').onclick = () => { tambahKoinManual(); muncratAcak
 function tambahKoinManual(){ koin = Math.round((koin + 0.1)*10)/10; saveData(); updateUI(); }
 function tambahKoinAuto(){ koin = koin + 1; saveData(); updateUI(); }
 
-// ANIMASI KLIK JADI ACAK KAYA GELEMBUNG
+// ANIMASI KLIK 10 BIJI + LEBIH CEPAT + MUNTER
 function muncratAcak(){
   var btn = document.getElementById('tap');
   var rect = btn.getBoundingClientRect();
   var cx = rect.left + rect.width/2;
   var cy = rect.top + rect.height/2;
-  for(var i=0; i<6; i++){
+  for(var i=0; i<10; i++){ // 10 biji sekali tap
     var sudut = Math.random() * 360;
-    var jarak = 20 + Math.random() * 80;
+    var jarak = 30 + Math.random() * 100;
     var x = cx + jarak * Math.cos(sudut * Math.PI / 180);
     var y = cy + jarak * Math.sin(sudut * Math.PI / 180);
     var m = document.createElement('div');
     m.className='money';
-    m.innerHTML = ['💵','🪙','💸'][Math.floor(Math.random()*3)];
+    m.innerHTML = ['💵','🪙','💸','💰'][Math.floor(Math.random()*4)];
     m.style.left = x + 'px';
     m.style.top = y + 'px';
-    m.style.animationDelay = i*0.05 + 's';
-    m.style.fontSize = (20 + Math.random()*15) + 'px'; // ukuran acak
+    m.style.animationDelay = i*0.03 + 's'; // lebih rapat
+    m.style.fontSize = (18 + Math.random()*20) + 'px';
     document.body.appendChild(m);
-    setTimeout(function(el){el.remove()},1000, m);
+    setTimeout(function(el){el.remove()},700, m);
   }
 }
 
