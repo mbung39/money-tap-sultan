@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   const { target, message } = req.body;
-  const FONNTE_TOKEN = "ISI_TOKEN_FONNTE_LU_DISINI"; // TARUH TOKEN DI SINI BIAR AMAN
+  const FONNTE_TOKEN = "8BrJG3zsBmCxwcqLAa9J"; // TARUH TOKEN DI SINI BIAR AMAN
 
   try {
     const response = await fetch("https://api.fonnte.com/send", {
