@@ -10,14 +10,12 @@ body{background:linear-gradient(135deg, #001a00 0%, #003300 100%); color:white; 
 h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 #koin{font-size:28px; background:#000; padding:10px 20px; border:3px solid gold; border-radius:20px; display:inline-block; margin:10px; color:gold; box-shadow:0 0 20px gold;}
 #tap{width:170px; height:170px; background:#000; border-radius:50%; border:7px solid gold; font-size:70px; margin:15px; box-shadow: 0 0 40px gold, inset 0 0 25px rgba(255,215,0,0.3); transition: all 0.2s;}
-#tap:active{transform:scale(0.88);}
-#tap.auto{box-shadow: 0 0 50px lime; border-color:lime;}
+#tap:active{transform:scale(0.88);} #tap.auto{box-shadow: 0 0 50px lime; border-color:lime;}
 .btn-group{display:flex; justify-content:center; gap:10px; margin:10px 0;}
 .btn-menu{flex:1; max-width:160px; padding:12px 10px; background:gold; color:#000; border:0; border-radius:12px; font-weight:bold; font-size:14px;}
 .btn-batal{background:#555; color:#fff;}
 .btn-logout{background:#DB4437; color:#fff;}
 .btn-admin{background:#00aa00; color:#fff;}
-.btn-kirimwa{background:#25D366; color:#fff; width:100%; margin-top:10px;}
 .popup{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99; justify-content:center; align-items:center; overflow-y:auto;}
 .box{background:#001a00; border:3px solid gold; padding:20px; width:95%; max-width:600px; border-radius:15px; max-height:90vh; overflow-y:auto;}
 .item{display:flex; justify-content:space-between; align-items:center; background:#000; padding:12px; margin:8px 0; border-radius:8px; border:1px solid gold; font-size:14px;}
@@ -29,24 +27,12 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 #btnAuto.aktif{background:#002200; color:lime; animation:none; border:2px solid lime; box-shadow:0 0 15px lime;}
 #btnLogin, #btnLogin2{background:#4285F4; color:#fff; padding:10px 20px; border:0; border-radius:10px; font-weight:bold; margin:5px; width:200px;}
 .money{position:fixed; font-size:26px; animation:muncrat 0.7s ease-out forwards; pointer-events:none; z-index:999;}
-@keyframes muncrat{
-  0%{opacity:1; transform:scale(0.3) translateY(0) rotate(0deg)}
-  100%{opacity:0; transform:scale(1.5) translateY(-200px) rotate(720deg)}
-}
+@keyframes muncrat{ 0%{opacity:1; transform:scale(0.3) translateY(0) rotate(0deg)} 100%{opacity:0; transform:scale(1.5) translateY(-200px) rotate(720deg)} }
 .uang-terbang{position:fixed; font-size:24px; bottom:-60px; pointer-events:none; z-index:1; opacity:0.4;}
-@keyframes naikGoyang {
-  0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0}
- 10%{opacity:0.7}
- 50%{transform:translateY(-400px) translateX(var(--x)) rotate(360deg)}
-  100%{transform:translateY(-900px) translateX(calc(var(--x) * -1)) rotate(720deg); opacity:0}
-}
-@keyframes kedip{
-  0%,100%{opacity:1;}
- 50%{opacity:0.7;}
-}
+@keyframes naikGoyang { 0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0} 10%{opacity:0.7} 50%{transform:translateY(-400px) translateX(var(--x)) rotate(360deg)} 100%{transform:translateY(-900px) translateX(calc(var(--x) * -1)) rotate(720deg); opacity:0} }
+@keyframes kedip{0%,100%{opacity:1;} 50%{opacity:0.7;}}
 .admin-wd{border:1px solid lime; background:#000; padding:10px; margin:8px 0; border-radius:8px; text-align:left; font-size:12px;}
 .btn-selesai{background:lime; color:#000; border:0; padding:5px 10px; border-radius:5px; font-weight:bold; margin-top:5px;}
-.struk-text{white-space:pre-line; text-align:left; background:#000; padding:10px; border-radius:8px; border:1px dashed gold;}
 </style>
 </head>
 <body>
@@ -75,50 +61,11 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
 <div class="iklan-box2">TEMPAT IKLAN 360x50</div>
 
-<div id="tukar" class="popup" onclick="hide('tukar')">
-  <div class="box" onclick="event.stopPropagation()">
-    <h2>💸 TUKAR SALDO 💸</h2>
-    <p style="color:gold; font-size:12px;">Minimal WD: 500.000 Koin</p>
-    <div id="listTukar"></div>
-    <button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('tukar')">TUTUP</button>
-  </div>
-</div>
-
-<div id="riwayat" class="popup" onclick="hide('riwayat')">
-  <div class="box" onclick="event.stopPropagation()">
-    <h2>📜 RIWAYAT WD</h2>
-    <div id="list"></div>
-    <button class="btn-menu btn-batal" style="max-width:100%;" onclick="hide('riwayat')">TUTUP</button>
-  </div>
-</div>
-
-<div id="admin" class="popup" onclick="hide('admin')">
-  <div class="box" onclick="event.stopPropagation()">
-    <h2>👑 PANEL ADMIN WD</h2>
-    <div id="listAdmin">Loading...</div>
-    <button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('admin')">TUTUP</button>
-  </div>
-</div>
-
-<div id="struk" class="popup" onclick="hide('struk')">
-  <div class="box" onclick="event.stopPropagation()">
-    <h2>✅ BERHASIL WD</h2>
-    <div id="isistruk" class="struk-text"></div>
-    <button class="btn-menu btn-kirimwa" onclick="kirimWAFonnte(strukTerakhir)">📱 KIRIM KE ADMIN</button>
-    <button class="btn-menu" style="max-width:100%; margin-top:5px;" onclick="hide('struk')">TUTUP</button>
-  </div>
-</div>
-
-<div id="konfirmasiLogout" class="popup" onclick="hide('konfirmasiLogout')">
-  <div class="box" onclick="event.stopPropagation()">
-    <h2>⚠️ YAKIN LOGOUT?</h2>
-    <p>Data koin aman tersimpan di cloud kok bree</p>
-    <div class="btn-group">
-      <button class="btn-menu btn-batal" onclick="hide('konfirmasiLogout')">BATAL</button>
-      <button class="btn-menu btn-logout" onclick="prosesLogout()">LOGOUT</button>
-    </div>
-  </div>
-</div>
+<div id="tukar" class="popup" onclick="hide('tukar')"><div class="box" onclick="event.stopPropagation()"><h2>💸 TUKAR SALDO 💸</h2><p style="color:gold; font-size:12px;">Minimal WD: 500.000 Koin</p><div id="listTukar"></div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('tukar')">TUTUP</button></div></div>
+<div id="riwayat" class="popup" onclick="hide('riwayat')"><div class="box" onclick="event.stopPropagation()"><h2>📜 RIWAYAT WD</h2><div id="list"></div><button class="btn-menu btn-batal" style="max-width:100%;" onclick="hide('riwayat')">TUTUP</button></div></div>
+<div id="admin" class="popup" onclick="hide('admin')"><div class="box" onclick="event.stopPropagation()"><h2>👑 PANEL ADMIN WD</h2><div id="listAdmin">Loading...</div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('admin')">TUTUP</button></div></div>
+<div id="struk" class="popup" onclick="hide('struk')"><div class="box" onclick="event.stopPropagation()"><h2>✅ BERHASIL</h2><div id="isistruk"></div><button class="btn-menu" style="max-width:100%;" onclick="hide('struk')">OK</button></div></div>
+<div id="konfirmasiLogout" class="popup" onclick="hide('konfirmasiLogout')"><div class="box" onclick="event.stopPropagation()"><h2>⚠️ YAKIN LOGOUT?</h2><p>Data koin aman tersimpan di cloud kok bree</p><div class="btn-group"><button class="btn-menu btn-batal" onclick="hide('konfirmasiLogout')">BATAL</button><button class="btn-menu btn-logout" onclick="prosesLogout()">LOGOUT</button></div></div></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -142,19 +89,11 @@ var hist = [];
 var autoSelesai = 0;
 var userId = null;
 var autoInterval = null;
-var strukTerakhir = "";
-var ADMIN_EMAIL = "didin39scakep39@gmail.com";
-var ADMIN_WA = "6288230543215";
+var ADMIN_EMAIL = "emailkamu@gmail.com"; // GANTI INI DENGAN EMAIL GOOGLE LU BREE
 
-function formatKoin(angka){
-  return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1});
-}
+function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
 
-auth.getRedirectResult().then((result) => {
-  if (result.user) {
-    location.reload();
-  }
-}).catch(function(error) {});
+auth.getRedirectResult().then((result) => { if (result.user) { location.reload(); } }).catch(function(error) {});
 
 auth.onAuthStateChanged(user => {
   if(user){
@@ -162,48 +101,22 @@ auth.onAuthStateChanged(user => {
     document.getElementById('btnLogin').innerText = 'LOGOUT';
     document.getElementById('btnLogin2').style.display = 'none';
     document.getElementById('userInfo').innerText = 'Halo, ' + user.displayName;
-    if(user.email == ADMIN_EMAIL){
-      document.querySelector('.btn-admin').style.display = 'inline-block';
-    } else {
-      document.querySelector('.btn-admin').style.display = 'none';
-    }
+    if(user.email == ADMIN_EMAIL){ document.querySelector('.btn-admin').style.display = 'inline-block'; } else { document.querySelector('.btn-admin').style.display = 'none'; }
     loadData();
   }else{
     userId = null;
     document.getElementById('btnLogin').innerText = 'LOGIN GOOGLE';
     document.getElementById('btnLogin2').style.display = 'inline-block';
     document.getElementById('userInfo').innerText = 'Belum Login';
-    koin = 0;
-    hist = [];
-    autoSelesai = 0;
+    koin = 0; hist = []; autoSelesai = 0;
     updateUI();
   }
 });
 
-function handleLogin(){
-  if(userId){
-    show('konfirmasiLogout');
-  } else {
-    loginPopup();
-  }
-}
-
-function loginPopup(){
-  var provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(function(error) {
-    alert("Popup gagal. Coba tombol LOGIN GOOGLE 2");
-  });
-}
-
-function loginRedirect(){
-  var provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithRedirect(provider);
-}
-
-function prosesLogout(){
-  hide('konfirmasiLogout');
-  auth.signOut();
-}
+function handleLogin(){ if(userId){ show('konfirmasiLogout'); } else { loginPopup(); } }
+function loginPopup(){ var provider = new firebase.auth.GoogleAuthProvider(); auth.signInWithPopup(provider).catch(function(error) { alert("Popup gagal. Coba tombol LOGIN GOOGLE 2"); }); }
+function loginRedirect(){ var provider = new firebase.auth.GoogleAuthProvider(); auth.signInWithRedirect(provider); }
+function prosesLogout(){ hide('konfirmasiLogout'); auth.signOut(); }
 
 function loadData(){
   db.collection("users").doc(userId).get().then(doc => {
@@ -226,54 +139,25 @@ function saveData(){
   db.collection("users").doc(userId).set({koin: koin, hist: hist, autoSelesai: autoSelesai});
 }
 
-function updateUI(){
-  document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin);
-}
+function updateUI(){ document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin); }
 
-document.getElementById('tap').onclick = () => {
-  tambahKoinManual();
-  muncratAcak();
-}
+document.getElementById('tap').onclick = () => { tambahKoinManual(); muncratAcak(); }
 
-function tambahKoinManual(){
-  koin = Math.round((koin + 0.1)*10)/10;
-  saveData();
-  updateUI();
-}
-
-function tambahKoinAuto(){
-  koin = koin + 1;
-  saveData();
-  updateUI();
-}
+function tambahKoinManual(){ koin = Math.round((koin + 0.1)*10)/10; saveData(); updateUI(); }
+function tambahKoinAuto(){ koin = koin + 1; saveData(); updateUI(); }
 
 function muncratAcak(){
-  var btn = document.getElementById('tap');
-  var rect = btn.getBoundingClientRect();
-  var cx = rect.left + rect.width/2;
-  var cy = rect.top + rect.height/2;
+  var btn = document.getElementById('tap'); var rect = btn.getBoundingClientRect(); var cx = rect.left + rect.width/2; var cy = rect.top + rect.height/2;
   for(var i=0; i<10; i++){
-    var sudut = Math.random() * 360;
-    var jarak = 30 + Math.random() * 100;
-    var x = cx + jarak * Math.cos(sudut * Math.PI / 180);
-    var y = cy + jarak * Math.sin(sudut * Math.PI / 180);
-    var m = document.createElement('div');
-    m.className='money';
-    m.innerHTML = ['💵','🪙','💸','💰'][Math.floor(Math.random()*4)];
-    m.style.left = x + 'px';
-    m.style.top = y + 'px';
-    m.style.animationDelay = i*0.03 + 's';
-    m.style.fontSize = (18 + Math.random()*20) + 'px';
-    document.body.appendChild(m);
-    setTimeout(function(el){el.remove()},700, m);
+    var sudut = Math.random() * 360; var jarak = 30 + Math.random() * 100; var x = cx + jarak * Math.cos(sudut * Math.PI / 180); var y = cy + jarak * Math.sin(sudut * Math.PI / 180);
+    var m = document.createElement('div'); m.className='money'; m.innerHTML = ['💵','🪙','💸','💰'][Math.floor(Math.random()*4)];
+    m.style.left = x + 'px'; m.style.top = y + 'px'; m.style.animationDelay = i*0.03 + 's'; m.style.fontSize = (18 + Math.random()*20) + 'px';
+    document.body.appendChild(m); setTimeout(function(el){el.remove()},700, m);
   }
 }
 
 function mulaiAuto(load, sisa){
-  if(!userId){
-    alert('Login dulu bree!');
-    return;
-  }
+  if(!userId){ alert('Login dulu bree!'); return; }
   if(autoInterval) return;
   if(!load){
     autoSelesai = Date.now() + (3600 * 1000);
@@ -281,15 +165,11 @@ function mulaiAuto(load, sisa){
   }
   document.getElementById('tap').className = 'auto';
   autoInterval = setInterval(function(){
-    tambahKoinAuto();
-    muncratAcak();
+    tambahKoinAuto(); muncratAcak();
     var sekarang = Date.now();
     var sisaMs = autoSelesai - sekarang;
     if(sisaMs <= 0){
-      clearInterval(autoInterval);
-      autoInterval = null;
-      autoSelesai = 0;
-      saveData();
+      clearInterval(autoInterval); autoInterval = null; autoSelesai = 0; saveData();
       document.getElementById('btnAuto').innerText = 'AKTIFKAN AUTO KLIK 1 JAM';
       document.getElementById('btnAuto').className = '';
       document.getElementById('btnAuto').disabled = false;
@@ -297,12 +177,9 @@ function mulaiAuto(load, sisa){
       return;
     }
     var sisaDetik = Math.floor(sisaMs / 1000);
-    var jam = Math.floor(sisaDetik/3600);
-    var menit = Math.floor((sisaDetik%3600)/60);
-    var detik = sisaDetik%60;
+    var jam = Math.floor(sisaDetik/3600); var menit = Math.floor((sisaDetik%3600)/60); var detik = sisaDetik%60;
     document.getElementById('btnAuto').innerText = '⏰ ' + jam + 'j ' + menit + 'm ' + detik + 'd';
-    document.getElementById('btnAuto').className = 'aktif';
-    document.getElementById('btnAuto').disabled = true;
+    document.getElementById('btnAuto').className = 'aktif'; document.getElementById('btnAuto').disabled = true;
   }, 1000);
 }
 
@@ -310,9 +187,9 @@ function show(id){
   if(id=='tukar'){
     var list = '';
     var paket = [
-      {nama: 'DANA/GOPAY 5.000', koin: 5},
-      {nama: 'DANA/GOPAY 10.000', koin: 1000000},
-      {nama: 'DANA/GOPAY 20.000', koin: 2000000}
+      {nama: 'DANA 5.000', koin: 500000},
+      {nama: 'GOPAY 10.000', koin: 1000000},
+      {nama: 'DANA 20.000', koin: 2000000}
     ];
     paket.forEach(p => {
       var disable = koin < p.koin? 'disabled' : '';
@@ -321,76 +198,30 @@ function show(id){
     document.getElementById('listTukar').innerHTML = list;
   }
   if(id=='riwayat'){
-    var s='';
-    if(hist.length==0){
-      s='Belum ada riwayat'
-    }
-    hist.forEach(h => {
-      s+=`<div style="border-bottom:1px solid gold; padding:8px; text-align:left;"><b>${h.menu}</b><br><small>${h.tgl}</small><br><small>No: ${h.ewallet}</small><br><small>Status: ${h.status}</small></div>`
-    })
+    var s=''; if(hist.length==0){s='Belum ada riwayat'}
+    hist.forEach(h => { s+=`<div style="border-bottom:1px solid gold; padding:8px; text-align:left;"><b>${h.menu}</b><br><small>${h.tgl}</small><br><small>No: ${h.ewallet}</small><br><small>Status: ${h.status}</small></div>` })
     document.getElementById('list').innerHTML=s;
   }
-  if(id=='admin'){
-    loadAdminPanel();
-  }
+  if(id=='admin'){ loadAdminPanel(); }
   document.getElementById(id).style.display='flex';
 }
-
-function hide(id){
-  document.getElementById(id).style.display='none';
-}
-
-try {
-        const response = await fetch('/api/kirim', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        const res = await response.json();
-        if(res.status == true){
-            alert('✅ Struk berhasil dikirim ke Admin');
-        } else {
-            alert('❌ Gagal kirim: ' + (res.reason || 'Cek server'));
-        }
-    } catch(err) {
-        alert('Error: ' + err);
-    }
-}
+function hide(id){document.getElementById(id).style.display='none';}
 
 function tukar(menu,harga){
-  if(!userId){
-    alert('Login dulu bree!');
-    return;
-  }
-  if(koin<harga){
-    alert('Koin kurang! Butuh '+formatKoin(harga)) ;
-    return;
-  }
-  var nama=prompt('Nama Penerima DANA/GOPAY:');
-  if(!nama)return;
-  var no=prompt('No DANA/GOPAY:');
-  if(!no)return;
+  if(!userId){ alert('Login dulu bree!'); return; }
+  if(koin<harga){alert('Koin kurang! Butuh '+formatKoin(harga)) ;return;}
+  var nama=prompt('Nama Penerima DANA/GOPAY:'); if(!nama)return;
+  var no=prompt('No DANA/GOPAY:'); if(!no)return;
   var user = auth.currentUser;
   koin=koin-harga;
   var tgl = new Date().toLocaleString('id');
-
-  strukTerakhir = `🚨 ADA WD BARU 🚨\n\nTanggal: ${tgl}\nNama: ${user.displayName}\nEmail: ${user.email}\nTarik: ${menu}\nNama DANA: ${nama}\nNo: ${no}\nSisa Koin: ${formatKoin(koin)}`;
-
   hist.unshift({
-    menu:menu,
-    tgl:tgl,
-    ewallet:no,
-    namaPenerima:nama,
-    namaAkun:user.displayName,
-    email:user.email,
-    uid:user.uid,
-    status:"Menunggu"
+    menu:menu, tgl:tgl, ewallet:no, namaPenerima:nama,
+    namaAkun:user.displayName, email:user.email, uid:user.uid, status:"Menunggu"
   });
-  saveData();
-  updateUI();
-  document.getElementById('isistruk').innerText = strukTerakhir;
-  hide('tukar');
-  show('struk');
+  saveData(); updateUI();
+  document.getElementById('isistruk').innerHTML=`<b>Tarik:</b> ${menu}<br><b>Nama:</b> ${nama}<br><b>No:</b> ${no}<br><b>Sisa:</b> ${formatKoin(koin)}<br><hr>Tunggu 1x24 Jam`;
+  hide('tukar'); show('struk');
 }
 
 function loadAdminPanel(){
@@ -403,7 +234,15 @@ function loadAdminPanel(){
       if(data.hist){
         data.hist.forEach((h, i) => {
           if(h.status == "Menunggu"){
-            s += `<div class="admin-wd"><b>${h.menu}</b><br>Nama Akun: ${h.namaAkun}<br>Email: ${h.email}<br>Nama DANA: ${h.namaPenerima}<br>No: ${h.ewallet}<br>Tgl: ${h.tgl}<br><button class="btn-selesai" onclick="selesaiWD('${doc.id}', ${i})">SUDAH TRANSFER</button></div>`;
+            s += `<div class="admin-wd">
+              <b>${h.menu}</b><br>
+              Nama Akun: ${h.namaAkun}<br>
+              Email: ${h.email}<br>
+              Nama DANA: ${h.namaPenerima}<br>
+              No: ${h.ewallet}<br>
+              Tgl: ${h.tgl}<br>
+              <button class="btn-selesai" onclick="selesaiWD('${doc.id}', ${i})">SUDAH TRANSFER</button>
+            </div>`;
           }
         });
       }
