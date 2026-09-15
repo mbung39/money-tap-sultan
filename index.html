@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💸 MONEY TAP SULTAN 💸</title>
 <style>
-/* CSS TETEP SAMA KAYA SEBELUMNYA */
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none;}
 body{background:linear-gradient(135deg, #001a00 0%, #003300 100%); color:white; text-align:center; font-family:Arial; margin:0; padding:15px; overflow-x:hidden;}
 h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
@@ -37,26 +36,31 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </style>
 </head>
 <body>
-<!-- HTML TETEP SAMA -->
+
 <div class="uang-terbang" style="left:5%; --x:50px; animation: naikGoyang 3s linear infinite; animation-delay:0s;">💸</div>
 <div class="uang-terbang" style="left:25%; --x:60px; animation: naikGoyang 3.5s linear infinite; animation-delay:0.6s;">🪙</div>
 <div class="uang-terbang" style="left:45%; --x:45px; animation: naikGoyang 3.2s linear infinite; animation-delay:1.2s;">💵</div>
 <div class="uang-terbang" style="left:65%; --x:35px; animation: naikGoyang 3.8s linear infinite; animation-delay:0.5s;">💸</div>
 <div class="uang-terbang" style="left:85%; --x:50px; animation: naikGoyang 3.3s linear infinite; animation-delay:1.1s;">🪙</div>
+
 <button id="btnLogin" onclick="handleLogin()">LOGIN GOOGLE</button><br>
 <button id="btnLogin2" onclick="loginRedirect()" style="background:#DB4437; font-size:12px;">LOGIN GOOGLE 2</button>
 <div id="userInfo" style="color:gold; font-size:12px; margin-bottom:10px;">Belum Login</div>
+
 <h1>💸 MONEY TAP SULTAN 💸</h1>
 <div id="koin">KOIIN: 0,0</div><br>
 <button id="tap">💰</button><br>
+
 <div class="btn-group">
   <button class="btn-menu" onclick="show('tukar')">TUKAR SALDO</button>
   <button class="btn-menu" onclick="show('riwayat')">RIWAYAT</button>
 </div>
 <button class="btn-menu btn-admin" onclick="show('admin')">PANEL ADMIN</button>
+
 <div class="iklan-box">TEMPAT IKLAN 320x100</div>
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
 <div class="iklan-box2">TEMPAT IKLAN 360x50</div>
+
 <div id="tukar" class="popup" onclick="hide('tukar')"><div class="box" onclick="event.stopPropagation()"><h2>💸 TUKAR SALDO 💸</h2><p style="color:gold; font-size:12px;">Minimal WD: 500.000 Koin</p><div id="listTukar"></div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('tukar')">TUTUP</button></div></div>
 <div id="riwayat" class="popup" onclick="hide('riwayat')"><div class="box" onclick="event.stopPropagation()"><h2>📜 RIWAYAT WD</h2><div id="list"></div><button class="btn-menu btn-batal" style="max-width:100%;" onclick="hide('riwayat')">TUTUP</button></div></div>
 <div id="admin" class="popup" onclick="hide('admin')"><div class="box" onclick="event.stopPropagation()"><h2>👑 PANEL ADMIN WD</h2><div id="listAdmin">Loading...</div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('admin')">TUTUP</button></div></div>
@@ -85,47 +89,138 @@ var hist = [];
 var autoSelesai = 0;
 var userId = null;
 var autoInterval = null;
-var ADMIN_EMAIL = "didin39scakep39@gmail.com";
-var FONNTE_TOKEN = "8BrJG3zsBmCxwcqLAa9J"; // AMBIL DARI md.fonnte.com
-var ADMIN_WA = "6288230543215"; // NOMER LU PAKE 62. AMAN GAK KESEBAR KE PLAYER
+var ADMIN_EMAIL = "didin39scakep39@gmail.com"; // GANTI INI DENGAN EMAIL GOOGLE LU BREE
+
+// TAMBAHAN 1: BUAT FONNTE
+var FONNTE_TOKEN = "ISI_TOKEN_FONNTE_LU_DISINI"; // AMBIL DARI md.fonnte.com
+var ADMIN_WA = "6288230543215"; // NOMER WA LU PAKE 62
 
 function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
 
-//... SEMUA FUNGSI LOGIN, LOAD, SAVE TETEP SAMA...
 auth.getRedirectResult().then((result) => { if (result.user) { location.reload(); } }).catch(function(error) {});
-auth.onAuthStateChanged(user => { if(user){ userId = user.uid; document.getElementById('btnLogin').innerText = 'LOGOUT'; document.getElementById('btnLogin2').style.display = 'none'; document.getElementById('userInfo').innerText = 'Halo, ' + user.displayName; if(user.email == ADMIN_EMAIL){ document.querySelector('.btn-admin').style.display = 'inline-block'; } else { document.querySelector('.btn-admin').style.display = 'none'; } loadData(); }else{ userId = null; document.getElementById('btnLogin').innerText = 'LOGIN GOOGLE'; document.getElementById('btnLogin2').style.display = 'inline-block'; document.getElementById('userInfo').innerText = 'Belum Login'; koin = 0; hist = []; autoSelesai = 0; updateUI(); } });
+
+auth.onAuthStateChanged(user => {
+  if(user){
+    userId = user.uid;
+    document.getElementById('btnLogin').innerText = 'LOGOUT';
+    document.getElementById('btnLogin2').style.display = 'none';
+    document.getElementById('userInfo').innerText = 'Halo, ' + user.displayName;
+    if(user.email == ADMIN_EMAIL){ document.querySelector('.btn-admin').style.display = 'inline-block'; } else { document.querySelector('.btn-admin').style.display = 'none'; }
+    loadData();
+  }else{
+    userId = null;
+    document.getElementById('btnLogin').innerText = 'LOGIN GOOGLE';
+    document.getElementById('btnLogin2').style.display = 'inline-block';
+    document.getElementById('userInfo').innerText = 'Belum Login';
+    koin = 0; hist = []; autoSelesai = 0;
+    updateUI();
+  }
+});
+
 function handleLogin(){ if(userId){ show('konfirmasiLogout'); } else { loginPopup(); } }
 function loginPopup(){ var provider = new firebase.auth.GoogleAuthProvider(); auth.signInWithPopup(provider).catch(function(error) { alert("Popup gagal. Coba tombol LOGIN GOOGLE 2"); }); }
 function loginRedirect(){ var provider = new firebase.auth.GoogleAuthProvider(); auth.signInWithRedirect(provider); }
 function prosesLogout(){ hide('konfirmasiLogout'); auth.signOut(); }
-function loadData(){ db.collection("users").doc(userId).get().then(doc => { if(doc.exists){ koin = doc.data().koin || 0; hist = doc.data().hist || []; autoSelesai = doc.data().autoSelesai || 0; var sekarang = Date.now(); if(autoSelesai > sekarang){ var sisaDetik = Math.floor((autoSelesai - sekarang) / 1000); mulaiAuto(true, sisaDetik); } } updateUI(); }); }
-function saveData(){ if(!userId) return; db.collection("users").doc(userId).set({koin: koin, hist: hist, autoSelesai: autoSelesai}); }
+
+function loadData(){
+  db.collection("users").doc(userId).get().then(doc => {
+    if(doc.exists){
+      koin = doc.data().koin || 0;
+      hist = doc.data().hist || [];
+      autoSelesai = doc.data().autoSelesai || 0;
+      var sekarang = Date.now();
+      if(autoSelesai > sekarang){
+        var sisaDetik = Math.floor((autoSelesai - sekarang) / 1000);
+        mulaiAuto(true, sisaDetik);
+      }
+    }
+    updateUI();
+  });
+}
+
+function saveData(){
+  if(!userId) return;
+  db.collection("users").doc(userId).set({koin: koin, hist: hist, autoSelesai: autoSelesai});
+}
+
 function updateUI(){ document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin); }
+
 document.getElementById('tap').onclick = () => { tambahKoinManual(); muncratAcak(); }
+
 function tambahKoinManual(){ koin = Math.round((koin + 0.1)*10)/10; saveData(); updateUI(); }
 function tambahKoinAuto(){ koin = koin + 1; saveData(); updateUI(); }
-function muncratAcak(){ var btn = document.getElementById('tap'); var rect = btn.getBoundingClientRect(); var cx = rect.left + rect.width/2; var cy = rect.top + rect.height/2; for(var i=0; i<10; i++){ var sudut = Math.random() * 360; var jarak = 30 + Math.random() * 100; var x = cx + jarak * Math.cos(sudut * Math.PI / 180); var y = cy + jarak * Math.sin(sudut * Math.PI / 180); var m = document.createElement('div'); m.className='money'; m.innerHTML = ['💵','🪙','💸','💰'][Math.floor(Math.random()*4)]; m.style.left = x + 'px'; m.style.top = y + 'px'; m.style.animationDelay = i*0.03 + 's'; m.style.fontSize = (18 + Math.random()*20) + 'px'; document.body.appendChild(m); setTimeout(function(el){el.remove()},700, m); } }
-function mulaiAuto(load, sisa){ if(!userId){ alert('Login dulu bree!'); return; } if(autoInterval) return; if(!load){ autoSelesai = Date.now() + (3600 * 1000); saveData(); } document.getElementById('tap').className = 'auto'; autoInterval = setInterval(function(){ tambahKoinAuto(); muncratAcak(); var sekarang = Date.now(); var sisaMs = autoSelesai - sekarang; if(sisaMs <= 0){ clearInterval(autoInterval); autoInterval = null; autoSelesai = 0; saveData(); document.getElementById('btnAuto').innerText = 'AKTIFKAN AUTO KLIK 1 JAM'; document.getElementById('btnAuto').className = ''; document.getElementById('btnAuto').disabled = false; document.getElementById('tap').className = ''; return; } var sisaDetik = Math.floor(sisaMs / 1000); var jam = Math.floor(sisaDetik/3600); var menit = Math.floor((sisaDetik%3600)/60); var detik = sisaDetik%60; document.getElementById('btnAuto').innerText = '⏰ ' + jam + 'j ' + menit + 'm ' + detik + 'd'; document.getElementById('btnAuto').className = 'aktif'; document.getElementById('btnAuto').disabled = true; }, 1000); }
-function show(id){ if(id=='tukar'){ var list = ''; var paket = [ {nama: 'DANA 5.000', koin: 500}, {nama: 'GOPAY 10.000', koin: 1000000}, {nama: 'DANA 20.000', koin: 2000000} ]; paket.forEach(p => { var disable = koin < p.koin? 'disabled' : ''; list += `<div class="item">${p.nama} <small>${formatKoin(p.koin)} koin</small> <button class="btn-tukar" ${disable} onclick="tukar('${p.nama}',${p.koin})">TUKAR</button></div>`; }); document.getElementById('listTukar').innerHTML = list; } if(id=='riwayat'){ var s=''; if(hist.length==0){s='Belum ada riwayat'} hist.forEach(h => { s+=`<div style="border-bottom:1px solid gold; padding:8px; text-align:left;"><b>${h.menu}</b><br><small>${h.tgl}</small><br><small>No: ${h.ewallet}</small><br><small>Status: ${h.status}</small></div>` }) document.getElementById('list').innerHTML=s; } if(id=='admin'){ loadAdminPanel(); } document.getElementById(id).style.display='flex'; }
+
+function muncratAcak(){
+  var btn = document.getElementById('tap'); var rect = btn.getBoundingClientRect(); var cx = rect.left + rect.width/2; var cy = rect.top + rect.height/2;
+  for(var i=0; i<10; i++){
+    var sudut = Math.random() * 360; var jarak = 30 + Math.random() * 100; var x = cx + jarak * Math.cos(sudut * Math.PI / 180); var y = cy + jarak * Math.sin(sudut * Math.PI / 180);
+    var m = document.createElement('div'); m.className='money'; m.innerHTML = ['💵','🪙','💸','💰'][Math.floor(Math.random()*4)];
+    m.style.left = x + 'px'; m.style.top = y + 'px'; m.style.animationDelay = i*0.03 + 's'; m.style.fontSize = (18 + Math.random()*20) + 'px';
+    document.body.appendChild(m); setTimeout(function(el){el.remove()},700, m);
+  }
+}
+
+function mulaiAuto(load, sisa){
+  if(!userId){ alert('Login dulu bree!'); return; }
+  if(autoInterval) return;
+  if(!load){
+    autoSelesai = Date.now() + (3600 * 1000);
+    saveData();
+  }
+  document.getElementById('tap').className = 'auto';
+  autoInterval = setInterval(function(){
+    tambahKoinAuto(); muncratAcak();
+    var sekarang = Date.now();
+    var sisaMs = autoSelesai - sekarang;
+    if(sisaMs <= 0){
+      clearInterval(autoInterval); autoInterval = null; autoSelesai = 0; saveData();
+      document.getElementById('btnAuto').innerText = 'AKTIFKAN AUTO KLIK 1 JAM';
+      document.getElementById('btnAuto').className = '';
+      document.getElementById('btnAuto').disabled = false;
+      document.getElementById('tap').className = '';
+      return;
+    }
+    var sisaDetik = Math.floor(sisaMs / 1000);
+    var jam = Math.floor(sisaDetik/3600); var menit = Math.floor((sisaDetik%3600)/60); var detik = sisaDetik%60;
+    document.getElementById('btnAuto').innerText = '⏰ ' + jam + 'j ' + menit + 'm ' + detik + 'd';
+    document.getElementById('btnAuto').className = 'aktif'; document.getElementById('btnAuto').disabled = true;
+  }, 1000);
+}
+
+function show(id){
+  if(id=='tukar'){
+    var list = '';
+    var paket = [
+      {nama: 'DANA/GOPAY 5.000', koin: 500},
+      {nama: 'DANA/GOPAY 10.000', koin: 1000000},
+      {nama: 'DANA/GOPAY 20.000', koin: 2000000}
+    ];
+    paket.forEach(p => {
+      var disable = koin < p.koin? 'disabled' : '';
+      list += `<div class="item">${p.nama} <small>${formatKoin(p.koin)} koin</small> <button class="btn-tukar" ${disable} onclick="tukar('${p.nama}',${p.koin})">TUKAR</button></div>`;
+    });
+    document.getElementById('listTukar').innerHTML = list;
+  }
+  if(id=='riwayat'){
+    var s=''; if(hist.length==0){s='Belum ada riwayat'}
+    hist.forEach(h => { s+=`<div style="border-bottom:1px solid gold; padding:8px; text-align:left;"><b>${h.menu}</b><br><small>${h.tgl}</small><br><small>No: ${h.ewallet}</small><br><small>Status: ${h.status}</small></div>` })
+    document.getElementById('list').innerHTML=s;
+  }
+  if(id=='admin'){ loadAdminPanel(); }
+  document.getElementById(id).style.display='flex';
+}
 function hide(id){document.getElementById(id).style.display='none';}
 
-// FUNGSI BARU: KIRIM WA PAKE FONNTE
+// TAMBAHAN 2: FUNGSI KIRIM WA
 function kirimWAFonnte(pesan){
   var formData = new FormData();
   formData.append("target", ADMIN_WA);
   formData.append("message", pesan);
-
   fetch("https://api.fonnte.com/send", {
     "method": "POST",
-    "headers": {
-      "Authorization": FONNTE_TOKEN
-    },
+    "headers": { "Authorization": FONNTE_TOKEN },
     "body": formData
-  }).then(res => res.json()).then(data => {
-    console.log("WA Terkirim:", data);
-  }).catch(err => {
-    console.log("Gagal kirim WA:", err);
-  });
+  }).then(res => res.json()).then(data => { console.log("WA Terkirim:", data); }).catch(err => { console.log("Gagal kirim WA:", err); });
 }
 
 function tukar(menu,harga){
@@ -142,15 +237,8 @@ function tukar(menu,harga){
   });
   saveData(); updateUI();
 
-  // KIRIM NOTIF KE WA ADMIN PAKE FONNTE
-  var pesanWA = `🚨 ADA WD BARU 🚨\n\n`+
-                `Nama: ${user.displayName}\n`+
-                `Email: ${user.email}\n`+
-                `Tarik: ${menu}\n`+
-                `Nama DANA: ${nama}\n`+
-                `No: ${no}\n`+
-                `Tgl: ${tgl}\n\n`+
-                `Langsung cek Panel Admin!`;
+  // TAMBAHAN 3: PANGGIL FONNTE DISINI
+  var pesanWA = `🚨 ADA WD BARU 🚨\n\nNama: ${user.displayName}\nEmail: ${user.email}\nTarik: ${menu}\nNama DANA: ${nama}\nNo: ${no}\nTgl: ${tgl}`;
   kirimWAFonnte(pesanWA);
 
   document.getElementById('isistruk').innerHTML=`<b>Tarik:</b> ${menu}<br><b>Nama:</b> ${nama}<br><b>No:</b> ${no}<br><b>Sisa:</b> ${formatKoin(koin)}<br><hr>Tunggu 1x24 Jam`;
