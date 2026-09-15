@@ -92,7 +92,7 @@ var autoInterval = null;
 var ADMIN_EMAIL = "didin39scakep39@gmail.com"; // GANTI INI DENGAN EMAIL GOOGLE LU BREE
 
 // TAMBAHAN 1: BUAT FONNTE
-var FONNTE_TOKEN = "8BrJG3zsBmCxwcqLAa9J"; // AMBIL DARI md.fonnte.com
+var FONNTE_TOKEN = ""; // AMBIL DARI md.fonnte.com
 var ADMIN_WA = "6288230543215"; // NOMER WA LU PAKE 62
 
 function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
@@ -213,14 +213,18 @@ function hide(id){document.getElementById(id).style.display='none';}
 
 // TAMBAHAN 2: FUNGSI KIRIM WA
 function kirimWAFonnte(pesan){
-  var formData = new FormData();
-  formData.append("target", ADMIN_WA);
-  formData.append("message", pesan);
-  fetch("https://api.fonnte.com/send", {
+  fetch("/api/kirim.js", { // INI YG DIGANTI. DULU LANGSUNG KE FONNTE
     "method": "POST",
-    "headers": { "Authorization": FONNTE_TOKEN },
-    "body": formData
-  }).then(res => res.json()).then(data => { console.log("WA Terkirim:", data); }).catch(err => { console.log("Gagal kirim WA:", err); });
+    "headers": { "Content-Type": "application/json" },
+    "body": JSON.stringify({ 
+      target: ADMIN_WA,
+      message: pesan
+    })
+  }).then(res => res.json()).then(data => { 
+    console.log("WA Terkirim:", data); 
+  }).catch(err => { 
+    console.log("Gagal kirim WA:", err);
+  });
 }
 
 function tukar(menu,harga){
