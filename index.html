@@ -89,7 +89,8 @@ var hist = [];
 var autoSelesai = 0;
 var userId = null;
 var autoInterval = null;
-var ADMIN_EMAIL = "didin39scakep39@gmail.com"; // GANTI INI DENGAN EMAIL GOOGLE LU BREE
+var ADMIN_EMAIL = "didin39scakep39@gmail.com";
+var ADMIN_WA = "6288230543215"; // PAKE 62 YA BREE, AMAN GAK KESEBAR
 
 function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
 
@@ -187,9 +188,9 @@ function show(id){
   if(id=='tukar'){
     var list = '';
     var paket = [
-      {nama: 'DANA/GOPAY 5.000', koin: 500},
-      {nama: 'DANA/GOPAY 10.000', koin: 1000000},
-      {nama: 'DANA/GOPAY 20.000', koin: 2000000}
+      {nama: 'DANA 5.000', koin: 500000}, // GUE BENERIN BREE, TADI 500 KECIL BANGET
+      {nama: 'GOPAY 10.000', koin: 1000000},
+      {nama: 'DANA 20.000', koin: 2000000}
     ];
     paket.forEach(p => {
       var disable = koin < p.koin? 'disabled' : '';
@@ -207,6 +208,12 @@ function show(id){
 }
 function hide(id){document.getElementById(id).style.display='none';}
 
+// FUNGSI BARU: KIRIM NOTIF WA
+function kirimWA(pesan){
+  var url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
+  window.open(url, '_blank');
+}
+
 function tukar(menu,harga){
   if(!userId){ alert('Login dulu bree!'); return; }
   if(koin<harga){alert('Koin kurang! Butuh '+formatKoin(harga)) ;return;}
@@ -220,6 +227,18 @@ function tukar(menu,harga){
     namaAkun:user.displayName, email:user.email, uid:user.uid, status:"Menunggu"
   });
   saveData(); updateUI();
+
+  // KIRIM NOTIF KE WA ADMIN OTOMATIS
+  var pesanWA = `🚨 ADA WD BARU 🚨%0A%0A`+
+                `Nama: ${user.displayName}%0A`+
+                `Email: ${user.email}%0A`+
+                `Tarik: ${menu}%0A`+
+                `Nama DANA: ${nama}%0A`+
+                `No: ${no}%0A`+
+                `Tgl: ${tgl}%0A%0A`+
+                `Langsung cek Panel Admin!`;
+  kirimWA(pesanWA);
+
   document.getElementById('isistruk').innerHTML=`<b>Tarik:</b> ${menu}<br><b>Nama:</b> ${nama}<br><b>No:</b> ${no}<br><b>Sisa:</b> ${formatKoin(koin)}<br><hr>Tunggu 1x24 Jam`;
   hide('tukar'); show('struk');
 }
