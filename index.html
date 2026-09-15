@@ -91,8 +91,8 @@ var userId = null;
 var autoInterval = null;
 var ADMIN_EMAIL = "didin39scakep39@gmail.com"; // GANTI INI DENGAN EMAIL GOOGLE LU BREE
 
-// TAMBAHAN 1: BUAT FONNTE
-var FONNTE_TOKEN = ""; // AMBIL DARI md.fonnte.com
+// TAMBAHAN 1: BUAT FONNTE - ISI INI
+var FONNTE_TOKEN = ""; // KOSONGIN AJA. TOKEN ADA DI /api/kirim.js
 var ADMIN_WA = "6285143890586"; // NOMER WA LU PAKE 62
 
 function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
@@ -211,9 +211,9 @@ function show(id){
 }
 function hide(id){document.getElementById(id).style.display='none';}
 
-// TAMBAHAN 2: FUNGSI KIRIM WA
+// TAMBAHAN 2: FUNGSI KIRIM WA - UDAH GUE BENERIN
 function kirimWAFonnte(pesan){
-  fetch("/api/kirim.js", { // INI YG DIGANTI. DULU LANGSUNG KE FONNTE
+  fetch("/api/kirim", { // GANTI JADI /api/kirim TANPA .js
     "method": "POST",
     "headers": { "Content-Type": "application/json" },
     "body": JSON.stringify({ 
