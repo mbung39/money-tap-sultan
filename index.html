@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="monetag" content="aafc28566c2e3c70b4e8ed59164eb612">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💸 MONEY TAP SULTAN 💸</title>
 <style>
@@ -22,79 +21,20 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 .item{display:flex; justify-content:space-between; align-items:center; background:#000; padding:12px; margin:8px 0; border-radius:8px; border:1px solid gold; font-size:14px;}
 .btn-tukar{background:gold; color:#000; border:0; padding:8px 12px; border-radius:8px; font-weight:bold; font-size:12px;}
 .btn-tukar:disabled{background:#333; color:#666;}
-.iklan-box{width:100%; max-width:320px; min-height:100px; background:#000; border:2px dashed gold; border-radius:10px; margin:15px auto 10px; display:flex; justify-content:center; align-items:center; color:gold; font-size:12px; overflow:hidden;}
-.iklan-box2{width:100%; max-width:360px; min-height:50px; background:#000; border:2px dashed lime; border-radius:10px; margin:10px auto 15px; display:flex; justify-content:center; align-items:center; color:lime; font-size:11px; overflow:hidden;}
 #btnAuto{width:90%; max-width:320px; padding:16px; font-size:17px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #00ff00, #00aa00); color:#000; animation: kedip 1.5s infinite;}
 #btnAuto.aktif{background:#002200; color:lime; animation:none; border:2px solid lime; box-shadow:0 0 15px lime;}
 #btnIklan{width:90%; max-width:320px; padding:14px; font-size:15px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #ff9900, #ff5500); color:#fff; margin-bottom:10px; box-shadow:0 0 15px orange;}
+#btnIklan:disabled{background:#333; color:#999; box-shadow:none;}
+#cooldownBox{width:90%; max-width:320px; margin:0 auto 15px; background:#000; border:2px solid #ff5500; border-radius:10px; padding:10px; font-size:14px; color:orange; display:none; font-weight:bold;}
 #btnLogin, #btnLogin2{background:#4285F4; color:#fff; padding:10px 20px; border:0; border-radius:10px; font-weight:bold; margin:5px; width:200px;}
 .money{position:fixed; font-size:26px; animation:muncrat 0.7s ease-out forwards; pointer-events:none; z-index:999;}
 @keyframes muncrat{ 0%{opacity:1; transform:scale(0.3) translateY(0) rotate(0deg)} 100%{opacity:0; transform:scale(1.5) translateY(-200px) rotate(720deg)} }
 .uang-terbang{position:fixed; font-size:24px; bottom:-60px; pointer-events:none; z-index:1; opacity:0.4;}
 @keyframes naikGoyang { 0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0} 10%{opacity:0.7} 50%{transform:translateY(-400px) translateX(var(--x)) rotate(360deg)} 100%{transform:translateY(-900px) translateX(calc(var(--x) * -1)) rotate(720deg); opacity:0} }
 @keyframes kedip{0%,100%{opacity:1;} 50%{opacity:0.7;}}
-
-/* === FIX FINAL OPSI A 95% x 65% + X HILANG === */
-#popupIklan{
-  background:linear-gradient(180deg, #ff8c00 0%, #ff4d00 100%)!important;
-  z-index:99999!important;
-  padding:0!important;
-}
-#popupIklan.iklan-content{
-  width:100vw!important;
-  height:100vh!important;
-  position:relative!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:center!important;
-  justify-content:flex-start!important;
-  padding-top:40px!important;
-}
-#popupIklan.btn-close-x{
-  display:none!important;
-}
-#popupIklan.judul-iklan{
-  font-size:36px!important;
-  font-weight:900!important;
-  color:#fff!important;
-  text-shadow:3px 3px 0 #000!important;
-  margin:20px 0 10px 0!important;
-  letter-spacing:1px!important;
-}
-#popupIklan.sub-judul{
-  color:#fff!important;
-  font-size:18px!important;
-  font-weight:bold!important;
-  margin:0 0 20px 0!important;
-  text-align:center!important;
-}
-#popupIklan.box-hitam{
-  width:95vw!important;
-  max-width:400px!important;
-  height:65vh!important;
-  min-height:550px!important;
-  background:#fff!important;
-  border-radius:20px!important;
-  overflow:hidden!important;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5)!important;
-}
-#popupIklan.box-hitam iframe{
-  width:100%!important;
-  height:100%!important;
-  border:0!important;
-  background:#fff!important;
-}
-#popupIklan.trivia{
-  margin-top:15px!important;
-  color:#fff!important;
-  font-size:16px!important;
-  font-weight:bold!important;
-}
-
 .admin-wd{border:1px solid lime; background:#000; padding:10px; margin:8px 0; border-radius:8px; text-align:left; font-size:12px;}
 .btn-selesai{background:lime; color:#000; border:0; padding:5px 10px; border-radius:5px; font-weight:bold; margin-top:5px;}
 </style>
-<script src="https://pl31365483.profitableratecpmnetwork.com/79/b3/2a/79b32a740afd2993e9ca65d1eb89785d.js"></script>
 </head>
 <body>
 
@@ -118,41 +58,16 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </div>
 <button id="btnAdmin" class="btn-menu btn-admin" onclick="show('admin')">PANEL ADMIN</button>
 
-<div class="iklan-box">
-<script>
-  atOptions = {'key':'b49aa3abb3db1ef686ef5f66f405e13c','format':'iframe','height':250,'width':300,'params':{}};
-</script>
-<script src="https://www.highrevenueformat.com/b49aa3abb3db1ef686ef5f66f405e13c/invoke.js"></script>
-</div>
-
-<button id="btnIklan" onclick="bukaIklan()">📺 NONTON IKLAN +1000</button><br>
+<button id="btnIklan" onclick="bukaIklan()">📺 KLAIM +1000 KOIN</button>
+<div id="cooldownBox">⏳ Cooldown: <span id="timerText">05:00</span></div>
+<br>
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
-
-<div class="iklan-box2">
-<script>
-  atOptions = {'key':'878c248db350f1d5e3578b3fbc114c16','format':'iframe','height':50,'width':320,'params':{}};
-</script>
-<script src="https://www.highrevenueformat.com/878c248db350f1d5e3578b3fbc114c16/invoke.js"></script>
-</div>
 
 <div id="tukar" class="popup" onclick="hide('tukar')"><div class="box" onclick="event.stopPropagation()"><h2>💸 TUKAR SALDO 💸</h2><p style="color:gold; font-size:12px;">Minimal WD: 500.000 Koin</p><div id="listTukar"></div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('tukar')">TUTUP</button></div></div>
 <div id="riwayat" class="popup" onclick="hide('riwayat')"><div class="box" onclick="event.stopPropagation()"><h2>📜 RIWAYAT WD</h2><div id="list"></div><button class="btn-menu btn-batal" style="max-width:100%;" onclick="hide('riwayat')">TUTUP</button></div></div>
 <div id="admin" class="popup" onclick="hide('admin')"><div class="box" onclick="event.stopPropagation()"><h2>👑 PANEL ADMIN WD</h2><div id="listAdmin">Loading...</div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('admin')">TUTUP</button></div></div>
 <div id="struk" class="popup" onclick="hide('struk')"><div class="box" onclick="event.stopPropagation()"><h2>✅ BERHASIL</h2><div id="isistruk"></div><button class="btn-menu" style="max-width:100%;" onclick="hide('struk')">OK</button></div></div>
 <div id="konfirmasiLogout" class="popup" onclick="hide('konfirmasiLogout')"><div class="box" onclick="event.stopPropagation()"><h2>⚠️ YAKIN LOGOUT?</h2><p>Data koin aman tersimpan di cloud kok bree</p><div class="btn-group"><button class="btn-menu btn-batal" onclick="hide('konfirmasiLogout')">BATAL</button><button class="btn-menu btn-logout" onclick="prosesLogout()">LOGOUT</button></div></div></div>
-
-<!-- POPUP IKLAN OPSI A - VERIFIKASI + TANPA X -->
-<div id="popupIklan" class="popup">
-  <div class="iklan-content" onclick="event.stopPropagation()">
-    <h2 class="judul-iklan">VERIFIKASI</h2>
-    <p class="sub-judul">Tonton iklan untuk dapat<br>1000 koin gratis</p>
-    <div class="box-hitam">
-      <iframe id="frameIklan" src="" loading="lazy"></iframe>
-    </div>
-    <div class="trivia" id="timerIklan">Memuat iklan... 10s</div>
-    <button id="btnKlaimIklan" class="btn-menu" style="background:#fff; color:#ff5500; margin-top:15px; display:none; max-width:320px; position:fixed; bottom:60px; left:50%; transform:translateX(-50%); z-index:100001;" onclick="klaimIklan()">KLAIM +1000 KOIN 💰</button>
-  </div>
-</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -176,12 +91,19 @@ var hist = [];
 var autoSelesai = 0;
 var userId = null;
 var autoInterval = null;
-var timerIklanInterval = null;
+var cooldownInterval = null;
+var cooldownEnd = 0;
 var ADMIN_EMAIL = "didin39scakep39@gmail.com";
 
-function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
+function formatKoin(angka){
+  return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1});
+}
 
-auth.getRedirectResult().then((result) => { if (result.user) { location.reload(); } }).catch(function(error) {});
+auth.getRedirectResult().then((result) => {
+  if (result.user) {
+    location.reload();
+  }
+}).catch(function(error) {});
 
 auth.onAuthStateChanged(user => {
   if(user){
@@ -196,21 +118,44 @@ auth.onAuthStateChanged(user => {
       document.getElementById('btnAdmin').style.display = 'none';
     }
     loadData();
+    cekCooldown();
   }else{
     userId = null;
     document.getElementById('btnLogin').innerText = 'LOGIN GOOGLE';
     document.getElementById('btnLogin2').style.display = 'inline-block';
     document.getElementById('userInfo').innerText = 'Belum Login';
     document.getElementById('btnAdmin').style.display = 'none';
-    koin = 0; hist = []; autoSelesai = 0;
+    koin = 0;
+    hist = [];
+    autoSelesai = 0;
     updateUI();
   }
 });
 
-function handleLogin(){ if(userId){ show('konfirmasiLogout'); } else { loginPopup(); } }
-function loginPopup(){ var provider = new firebase.auth.GoogleAuthProvider(); auth.signInWithPopup(provider).catch(function(error) { alert("Popup gagal. Coba tombol LOGIN GOOGLE 2"); }); }
-function loginRedirect(){ var provider = new firebase.auth.GoogleAuthProvider(); auth.signInWithRedirect(provider); }
-function prosesLogout(){ hide('konfirmasiLogout'); auth.signOut(); }
+function handleLogin(){
+  if(userId){
+    show('konfirmasiLogout');
+  } else {
+    loginPopup();
+  }
+}
+
+function loginPopup(){
+  var provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch(function(error) {
+    alert("Popup gagal. Coba tombol LOGIN GOOGLE 2");
+  });
+}
+
+function loginRedirect(){
+  var provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithRedirect(provider);
+}
+
+function prosesLogout(){
+  hide('konfirmasiLogout');
+  auth.signOut();
+}
 
 function loadData(){
   db.collection("users").doc(userId).get().then(doc => {
@@ -218,6 +163,7 @@ function loadData(){
       koin = doc.data().koin || 0;
       hist = doc.data().hist || [];
       autoSelesai = doc.data().autoSelesai || 0;
+      cooldownEnd = doc.data().cooldownIklan || 0;
       var lastSave = doc.data().lastSave || 0;
       var sekarang = Date.now();
       if(autoSelesai > sekarang){
@@ -229,67 +175,128 @@ function loadData(){
             koin = koin + detikOffline;
           }
         }
-        var sisaDetik = Math.floor((autoSelesai - sekarang) / 1000);
-        mulaiAuto(true, sisaDetik);
       }
     }
     updateUI();
+    cekCooldown();
   });
 }
 
 function saveData(){
   if(!userId) return;
-  db.collection("users").doc(userId).set({koin: koin, hist: hist, autoSelesai: autoSelesai, lastSave: Date.now()});
+  db.collection("users").doc(userId).set({
+    koin: koin,
+    hist: hist,
+    autoSelesai: autoSelesai,
+    cooldownIklan: cooldownEnd,
+    lastSave: Date.now()
+  });
 }
 
-function updateUI(){ document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin); }
+function updateUI(){
+  document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin);
+}
 
-document.getElementById('tap').onclick = () => { tambahKoinManual(); muncratAcak(); }
+document.getElementById('tap').onclick = () => {
+  tambahKoinManual();
+  muncratAcak();
+}
 
-function tambahKoinManual(){ koin = Math.round((koin + 0.1)*10)/10; saveData(); updateUI(); }
-function tambahKoinAuto(){ koin = koin + 1; saveData(); updateUI(); }
+function tambahKoinManual(){
+  koin = Math.round((koin + 0.1)*10)/10;
+  saveData();
+  updateUI();
+}
+
+function tambahKoinAuto(){
+  koin = koin + 1;
+  saveData();
+  updateUI();
+}
 
 function muncratAcak(){
-  var btn = document.getElementById('tap'); var rect = btn.getBoundingClientRect(); var cx = rect.left + rect.width/2; var cy = rect.top + rect.height/2;
+  var btn = document.getElementById('tap');
+  var rect = btn.getBoundingClientRect();
+  var cx = rect.left + rect.width/2;
+  var cy = rect.top + rect.height/2;
   for(var i=0; i<10; i++){
-    var sudut = Math.random() * 360; var jarak = 30 + Math.random() * 100; var x = cx + jarak * Math.cos(sudut * Math.PI / 180); var y = cy + jarak * Math.sin(sudut * Math.PI / 180);
-    var m = document.createElement('div'); m.className='money'; m.innerHTML = ['💵','🪙','💸','💰'][Math.floor(Math.random()*4)];
-    m.style.left = x + 'px'; m.style.top = y + 'px'; m.style.animationDelay = i*0.03 + 's'; m.style.fontSize = (18 + Math.random()*20) + 'px';
-    document.body.appendChild(m); setTimeout(function(el){el.remove()},700, m);
+    var sudut = Math.random() * 360;
+    var jarak = 30 + Math.random() * 100;
+    var x = cx + jarak * Math.cos(sudut * Math.PI / 180);
+    var y = cy + jarak * Math.sin(sudut * Math.PI / 180);
+    var m = document.createElement('div');
+    m.className='money';
+    m.innerHTML = ['💵','🪙','💸','💰'][Math.floor(Math.random()*4)];
+    m.style.left = x + 'px';
+    m.style.top = y + 'px';
+    m.style.animationDelay = i*0.03 + 's';
+    m.style.fontSize = (18 + Math.random()*20) + 'px';
+    document.body.appendChild(m);
+    setTimeout(function(el){el.remove()},700, m);
   }
 }
 
 function bukaIklan(){
-  if(!userId){ alert('Login dulu bree!'); return; }
-  document.getElementById('frameIklan').src = 'https://omg10.com/4/11813928';
-  document.getElementById('btnKlaimIklan').style.display = 'none';
-  document.getElementById('popupIklan').style.display = 'flex';
-  var detik = 10;
-  document.getElementById('timerIklan').innerText = 'Tunggu ' + detik + 's untuk klaim...';
-  if(timerIklanInterval) clearInterval(timerIklanInterval);
-  timerIklanInterval = setInterval(function(){
-    detik--;
-    if(detik > 0){
-      document.getElementById('timerIklan').innerText = 'Tunggu ' + detik + 's untuk klaim... Trivia ' + (10-detik) + '/10';
-    } else {
-      clearInterval(timerIklanInterval);
-      document.getElementById('timerIklan').innerText = 'Selesai! Klaim hadiahmu';
-      document.getElementById('btnKlaimIklan').style.display = 'inline-block';
-    }
-  }, 1000);
+  if(!userId){
+    alert('Login dulu bree!');
+    return;
+  }
+  var now = Date.now();
+  if(cooldownEnd > now){
+    alert('Tunggu cooldown bree!');
+    return;
+  }
+  koin = koin + 1000;
+  cooldownEnd = now + (5*60*1000);
+  saveData();
+  updateUI();
+  muncratAcak();
+  muncratAcak();
+  alert('Mantap bree! +1000 koin masuk 💰');
+  mulaiCooldown();
 }
 
-function klaimIklan(){
-  koin = koin + 1000;
-  saveData(); updateUI();
-  hide('popupIklan');
-  document.getElementById('frameIklan').src = '';
-  alert('Mantap bree! +1000 koin masuk 💰');
-  muncratAcak(); muncratAcak();
+function cekCooldown(){
+  var now = Date.now();
+  if(cooldownEnd > now){
+    mulaiCooldown();
+  } else {
+    resetTombol();
+  }
+}
+
+function mulaiCooldown(){
+  if(cooldownInterval) clearInterval(cooldownInterval);
+  document.getElementById('btnIklan').disabled = true;
+  document.getElementById('cooldownBox').style.display = 'block';
+  cooldownInterval = setInterval(function(){
+    var now = Date.now();
+    var sisa = cooldownEnd - now;
+    if(sisa <= 0){
+      clearInterval(cooldownInterval);
+      resetTombol();
+      return;
+    }
+    var menit = Math.floor(sisa/60000);
+    var detik = Math.floor((sisa%60000)/1000);
+    var teks = (menit<10?'0':'')+menit+':'+(detik<10?'0':'')+detik;
+    document.getElementById('timerText').innerText = teks;
+    document.getElementById('btnIklan').innerText = '⏳ TUNGGU '+teks;
+  },1000);
+}
+
+function resetTombol(){
+  document.getElementById('btnIklan').disabled = false;
+  document.getElementById('btnIklan').innerText = '📺 KLAIM +1000 KOIN';
+  document.getElementById('cooldownBox').style.display = 'none';
+  document.getElementById('timerText').innerText = '05:00';
 }
 
 function mulaiAuto(load, sisa){
-  if(!userId){ alert('Login dulu bree!'); return; }
+  if(!userId){
+    alert('Login dulu bree!');
+    return;
+  }
   if(autoInterval) return;
   if(!load){
     autoSelesai = Date.now() + (3600 * 1000);
@@ -297,11 +304,15 @@ function mulaiAuto(load, sisa){
   }
   document.getElementById('tap').className = 'auto';
   autoInterval = setInterval(function(){
-    tambahKoinAuto(); muncratAcak();
+    tambahKoinAuto();
+    muncratAcak();
     var sekarang = Date.now();
     var sisaMs = autoSelesai - sekarang;
     if(sisaMs <= 0){
-      clearInterval(autoInterval); autoInterval = null; autoSelesai = 0; saveData();
+      clearInterval(autoInterval);
+      autoInterval = null;
+      autoSelesai = 0;
+      saveData();
       document.getElementById('btnAuto').innerText = 'AKTIFKAN AUTO KLIK 1 JAM';
       document.getElementById('btnAuto').className = '';
       document.getElementById('btnAuto').disabled = false;
@@ -309,10 +320,13 @@ function mulaiAuto(load, sisa){
       return;
     }
     var sisaDetik = Math.floor(sisaMs / 1000);
-    var jam = Math.floor(sisaDetik/3600); var menit = Math.floor((sisaDetik%3600)/60); var detik = sisaDetik%60;
+    var jam = Math.floor(sisaDetik/3600);
+    var menit = Math.floor((sisaDetik%3600)/60);
+    var detik = sisaDetik%60;
     document.getElementById('btnAuto').innerText = '⏰ ' + jam + 'j ' + menit + 'm ' + detik + 'd';
-    document.getElementById('btnAuto').className = 'aktif'; document.getElementById('btnAuto').disabled = true;
-  }, 1000);
+    document.getElementById('btnAuto').className = 'aktif';
+    document.getElementById('btnAuto').disabled = true;
+  },1000);
 }
 
 function show(id){
@@ -330,36 +344,54 @@ function show(id){
     document.getElementById('listTukar').innerHTML = list;
   }
   if(id=='riwayat'){
-    var s=''; if(hist.length==0){s='Belum ada riwayat'}
-    hist.forEach(h => { s+=`<div style="border-bottom:1px solid gold; padding:8px; text-align:left;"><b>${h.menu}</b><br><small>${h.tgl}</small><br><small>No: ${h.ewallet}</small><br><small>Status: ${h.status}</small></div>` })
+    var s='';
+    if(hist.length==0){s='Belum ada riwayat'}
+    hist.forEach(h => {
+      s+=`<div style="border-bottom:1px solid gold; padding:8px; text-align:left;"><b>${h.menu}</b><br><small>${h.tgl}</small><br><small>No: ${h.ewallet}</small><br><small>Status: ${h.status}</small></div>`
+    })
     document.getElementById('list').innerHTML=s;
   }
-  if(id=='admin'){ loadAdminPanel(); }
+  if(id=='admin'){
+    loadAdminPanel();
+  }
   document.getElementById(id).style.display='flex';
 }
+
 function hide(id){
   document.getElementById(id).style.display='none';
-  if(id=='popupIklan'){
-    document.getElementById('frameIklan').src = '';
-    if(timerIklanInterval) clearInterval(timerIklanInterval);
-  }
 }
 
 function tukar(menu,harga){
-  if(!userId){ alert('Login dulu bree!'); return; }
-  if(koin<harga){alert('Koin kurang! Butuh '+formatKoin(harga)) ;return;}
-  var nama=prompt('Nama Penerima DANA/GOPAY:'); if(!nama)return;
-  var no=prompt('No DANA/GOPAY:'); if(!no)return;
+  if(!userId){
+    alert('Login dulu bree!');
+    return;
+  }
+  if(koin<harga){
+    alert('Koin kurang! Butuh '+formatKoin(harga));
+    return;
+  }
+  var nama=prompt('Nama Penerima DANA/GOPAY:');
+  if(!nama)return;
+  var no=prompt('No DANA/GOPAY:');
+  if(!no)return;
   var user = auth.currentUser;
   koin=koin-harga;
   var tgl = new Date().toLocaleString('id');
   hist.unshift({
-    menu:menu, tgl:tgl, ewallet:no, namaPenerima:nama,
-    namaAkun:user.displayName, email:user.email, uid:user.uid, status:"Menunggu"
+    menu:menu,
+    tgl:tgl,
+    ewallet:no,
+    namaPenerima:nama,
+    namaAkun:user.displayName,
+    email:user.email,
+    uid:user.uid,
+    status:"Menunggu"
   });
-  saveData(); updateUI();
+  saveData();
+  updateUI();
   document.getElementById('isistruk').innerHTML=`<b>Tarik:</b> ${menu}<br><b>Nama:</b> ${nama}<br><b>No:</b> ${no}<br><b>Sisa:</b> ${formatKoin(koin)}<br><hr>Tunggu 1x24 Jam`;
-  hide('tukar'); show('struk');
+  hide('tukar');
+  show('struk');
 }
 
 function loadAdminPanel(){
