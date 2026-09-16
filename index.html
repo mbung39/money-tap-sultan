@@ -21,6 +21,8 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 .item{display:flex; justify-content:space-between; align-items:center; background:#000; padding:12px; margin:8px 0; border-radius:8px; border:1px solid gold; font-size:14px;}
 .btn-tukar{background:gold; color:#000; border:0; padding:8px 12px; border-radius:8px; font-weight:bold; font-size:12px;}
 .btn-tukar:disabled{background:#333; color:#666;}
+.iklan-box{width:100%; max-width:320px; min-height:100px; background:#000; border:2px dashed gold; border-radius:10px; margin:15px auto 10px; display:flex; justify-content:center; align-items:center; color:gold; font-size:12px; overflow:hidden;}
+.iklan-box2{width:100%; max-width:360px; min-height:50px; background:#000; border:2px dashed lime; border-radius:10px; margin:10px auto 15px; display:flex; justify-content:center; align-items:center; color:lime; font-size:11px; overflow:hidden;}
 #btnAuto{width:90%; max-width:320px; padding:16px; font-size:17px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #00ff00, #00aa00); color:#000; animation: kedip 1.5s infinite;}
 #btnAuto.aktif{background:#002200; color:lime; animation:none; border:2px solid lime; box-shadow:0 0 15px lime;}
 #btnIklan{width:90%; max-width:320px; padding:14px; font-size:15px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #ff9900, #ff5500); color:#fff; margin-bottom:10px; box-shadow:0 0 15px orange;}
@@ -58,10 +60,36 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </div>
 <button id="btnAdmin" class="btn-menu btn-admin" onclick="show('admin')">PANEL ADMIN</button>
 
+<div class="iklan-box">
+<script>
+  atOptions = {
+    'key' : 'b49aa3abb3db1ef686ef5f66f405e13c',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/b49aa3abb3db1ef686ef5f66f405e13c/invoke.js"></script>
+</div>
+
 <button id="btnIklan" onclick="bukaIklan()">📺 KLAIM +1000 KOIN</button>
 <div id="cooldownBox">⏳ Cooldown: <span id="timerText">05:00</span></div>
 <br>
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
+
+<div class="iklan-box2">
+<script>
+  atOptions = {
+    'key' : '878c248db350f1d5e3578b3fbc114c16',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/878c248db350f1d5e3578b3fbc114c16/invoke.js"></script>
+</div>
 
 <div id="tukar" class="popup" onclick="hide('tukar')"><div class="box" onclick="event.stopPropagation()"><h2>💸 TUKAR SALDO 💸</h2><p style="color:gold; font-size:12px;">Minimal WD: 500.000 Koin</p><div id="listTukar"></div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('tukar')">TUTUP</button></div></div>
 <div id="riwayat" class="popup" onclick="hide('riwayat')"><div class="box" onclick="event.stopPropagation()"><h2>📜 RIWAYAT WD</h2><div id="list"></div><button class="btn-menu btn-batal" style="max-width:100%;" onclick="hide('riwayat')">TUTUP</button></div></div>
