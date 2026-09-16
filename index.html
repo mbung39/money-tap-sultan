@@ -39,27 +39,22 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </style>
 </head>
 <body>
-
 <div class="uang-terbang" style="left:5%; --x:50px; animation: naikGoyang 3s linear infinite; animation-delay:0s;">💸</div>
 <div class="uang-terbang" style="left:25%; --x:60px; animation: naikGoyang 3.5s linear infinite; animation-delay:0.6s;">🪙</div>
 <div class="uang-terbang" style="left:45%; --x:45px; animation: naikGoyang 3.2s linear infinite; animation-delay:1.2s;">💵</div>
 <div class="uang-terbang" style="left:65%; --x:35px; animation: naikGoyang 3.8s linear infinite; animation-delay:0.5s;">💸</div>
 <div class="uang-terbang" style="left:85%; --x:50px; animation: naikGoyang 3.3s linear infinite; animation-delay:1.1s;">🪙</div>
-
 <button id="btnLogin" onclick="handleLogin()">LOGIN GOOGLE</button><br>
 <button id="btnLogin2" onclick="loginRedirect()" style="background:#DB4437; font-size:12px;">LOGIN GOOGLE 2</button>
 <div id="userInfo" style="color:gold; font-size:12px; margin-bottom:10px;">Belum Login</div>
-
 <h1>💸 MONEY TAP SULTAN 💸</h1>
 <div id="koin">KOIIN: 0,0</div><br>
 <button id="tap">💰</button><br>
-
 <div class="btn-group">
   <button class="btn-menu" onclick="show('tukar')">TUKAR SALDO</button>
   <button class="btn-menu" onclick="show('riwayat')">RIWAYAT</button>
 </div>
 <button id="btnAdmin" class="btn-menu btn-admin" onclick="show('admin')">PANEL ADMIN</button>
-
 <div class="iklan-box">
 <script>
   atOptions = {
@@ -72,11 +67,9 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </script>
 <script src="https://www.highrevenueformat.com/b49aa3abb3db1ef686ef5f66f405e13c/invoke.js"></script>
 </div>
-
 <button id="btnIklan" onclick="bukaIklan()">📺 KLAIM +1000 KOIN</button>
 <br>
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
-
 <div class="iklan-box2">
 <script>
   atOptions = {
@@ -89,17 +82,14 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </script>
 <script src="https://www.highrevenueformat.com/878c248db350f1d5e3578b3fbc114c16/invoke.js"></script>
 </div>
-
 <div id="tukar" class="popup" onclick="hide('tukar')"><div class="box" onclick="event.stopPropagation()"><h2>💸 TUKAR SALDO 💸</h2><p style="color:gold; font-size:12px;">Minimal WD: 500.000 Koin</p><div id="listTukar"></div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('tukar')">TUTUP</button></div></div>
 <div id="riwayat" class="popup" onclick="hide('riwayat')"><div class="box" onclick="event.stopPropagation()"><h2>📜 RIWAYAT WD</h2><div id="list"></div><button class="btn-menu btn-batal" style="max-width:100%;" onclick="hide('riwayat')">TUTUP</button></div></div>
 <div id="admin" class="popup" onclick="hide('admin')"><div class="box" onclick="event.stopPropagation()"><h2>👑 PANEL ADMIN WD</h2><div id="listAdmin">Loading...</div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('admin')">TUTUP</button></div></div>
 <div id="struk" class="popup" onclick="hide('struk')"><div class="box" onclick="event.stopPropagation()"><h2>✅ BERHASIL</h2><div id="isistruk"></div><button class="btn-menu" style="max-width:100%;" onclick="hide('struk')">OK</button></div></div>
 <div id="konfirmasiLogout" class="popup" onclick="hide('konfirmasiLogout')"><div class="box" onclick="event.stopPropagation()"><h2>⚠️ YAKIN LOGOUT?</h2><p>Data koin aman tersimpan di cloud kok bree</p><div class="btn-group"><button class="btn-menu btn-batal" onclick="hide('konfirmasiLogout')">BATAL</button><button class="btn-menu btn-logout" onclick="prosesLogout()">LOGOUT</button></div></div></div>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyC0nYhsMgueVA_91JWw-m8pXWRIZiizzG4",
@@ -112,7 +102,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
-
 var koin = 0;
 var hist = [];
 var autoSelesai = 0;
@@ -121,17 +110,14 @@ var autoInterval = null;
 var cooldownInterval = null;
 var cooldownEnd = 0;
 var ADMIN_EMAIL = "didin39scakep39@gmail.com";
-
 function formatKoin(angka){
   return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1});
 }
-
 auth.getRedirectResult().then((result) => {
   if (result.user) {
     location.reload();
   }
 }).catch(function(error) {});
-
 auth.onAuthStateChanged(user => {
   if(user){
     userId = user.uid;
@@ -157,7 +143,6 @@ auth.onAuthStateChanged(user => {
     updateUI();
   }
 });
-
 function handleLogin(){
   if(userId){
     show('konfirmasiLogout');
@@ -165,24 +150,20 @@ function handleLogin(){
     loginPopup();
   }
 }
-
 function loginPopup(){
   var provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider).catch(function(error) {
     alert("Popup gagal. Coba tombol LOGIN GOOGLE 2");
   });
 }
-
 function loginRedirect(){
   var provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithRedirect(provider);
 }
-
 function prosesLogout(){
   hide('konfirmasiLogout');
   auth.signOut();
 }
-
 function loadData(){
   db.collection("users").doc(userId).get().then(doc => {
     if(doc.exists){
@@ -212,7 +193,6 @@ function loadData(){
     updateUI();
   });
 }
-
 function saveData(){
   if(!userId) return;
   db.collection("users").doc(userId).set({
@@ -223,28 +203,23 @@ function saveData(){
     lastSave: Date.now()
   }, {merge: true});
 }
-
 function updateUI(){
   document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin);
 }
-
 document.getElementById('tap').onclick = () => {
   tambahKoinManual();
   muncratAcak();
 }
-
 function tambahKoinManual(){
   koin = Math.round((koin + 0.1)*10)/10;
   saveData();
   updateUI();
 }
-
 function tambahKoinAuto(){
   koin = koin + 1;
   saveData();
   updateUI();
 }
-
 function muncratAcak(){
   var btn = document.getElementById('tap');
   var rect = btn.getBoundingClientRect();
@@ -266,7 +241,6 @@ function muncratAcak(){
     setTimeout(function(el){el.remove()},700, m);
   }
 }
-
 function bukaIklan(){
   if(!userId){
     alert('Login dulu bree!');
@@ -276,6 +250,10 @@ function bukaIklan(){
   if(cooldownEnd > now){
     return;
   }
+  var pop = document.createElement('script');
+  pop.src = 'https://pl31365484.profitableratecpmnetwork.com/7e/fd/db/7efddb7bbcaf27f8bf958cab871b1e7f.js';
+  document.body.appendChild(pop);
+
   koin = koin + 1000;
   cooldownEnd = now + (5*60*1000);
   saveData();
@@ -284,7 +262,6 @@ function bukaIklan(){
   muncratAcak();
   mulaiCooldown();
 }
-
 function mulaiCooldown(){
   if(cooldownInterval) clearInterval(cooldownInterval);
   var btn = document.getElementById('btnIklan');
@@ -303,14 +280,12 @@ function mulaiCooldown(){
     btn.innerText = '⏳ TUNGGU '+teks;
   },1000);
 }
-
 function resetTombol(){
   var btn = document.getElementById('btnIklan');
   if(cooldownInterval) clearInterval(cooldownInterval);
   btn.disabled = false;
   btn.innerText = '📺 KLAIM +1000 KOIN';
 }
-
 function mulaiAuto(load){
   if(!userId){
     alert('Login dulu bree!');
@@ -347,7 +322,6 @@ function mulaiAuto(load){
     document.getElementById('btnAuto').disabled = true;
   },1000);
 }
-
 function show(id){
   if(id=='tukar'){
     var list = '';
@@ -375,11 +349,9 @@ function show(id){
   }
   document.getElementById(id).style.display='flex';
 }
-
 function hide(id){
   document.getElementById(id).style.display='none';
 }
-
 function tukar(menu,harga){
   if(!userId){
     alert('Login dulu bree!');
@@ -412,7 +384,6 @@ function tukar(menu,harga){
   hide('tukar');
   show('struk');
 }
-
 function loadAdminPanel(){
   var s = 'Loading data WD...';
   document.getElementById('listAdmin').innerHTML = s;
@@ -440,7 +411,6 @@ function loadAdminPanel(){
     document.getElementById('listAdmin').innerHTML = s;
   });
 }
-
 function selesaiWD(uid, index){
   if(!confirm('Yakin sudah transfer?')) return;
   db.collection("users").doc(uid).get().then(doc => {
@@ -453,8 +423,6 @@ function selesaiWD(uid, index){
   });
 }
 </script>
-
 <script>(function(s){s.dataset.zone='11814632',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
 </body>
-</html>
+</html>##
