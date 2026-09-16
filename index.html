@@ -26,12 +26,24 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 .iklan-box2{width:100%; max-width:360px; min-height:50px; background:#000; border:2px dashed lime; border-radius:10px; margin:10px auto 15px; display:flex; justify-content:center; align-items:center; color:lime; font-size:11px; overflow:hidden;}
 #btnAuto{width:90%; max-width:320px; padding:16px; font-size:17px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #00ff00, #00aa00); color:#000; animation: kedip 1.5s infinite;}
 #btnAuto.aktif{background:#002200; color:lime; animation:none; border:2px solid lime; box-shadow:0 0 15px lime;}
+#btnIklan{width:90%; max-width:320px; padding:14px; font-size:15px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #ff9900, #ff5500); color:#fff; margin-bottom:10px; box-shadow:0 0 15px orange;}
 #btnLogin, #btnLogin2{background:#4285F4; color:#fff; padding:10px 20px; border:0; border-radius:10px; font-weight:bold; margin:5px; width:200px;}
 .money{position:fixed; font-size:26px; animation:muncrat 0.7s ease-out forwards; pointer-events:none; z-index:999;}
 @keyframes muncrat{ 0%{opacity:1; transform:scale(0.3) translateY(0) rotate(0deg)} 100%{opacity:0; transform:scale(1.5) translateY(-200px) rotate(720deg)} }
 .uang-terbang{position:fixed; font-size:24px; bottom:-60px; pointer-events:none; z-index:1; opacity:0.4;}
 @keyframes naikGoyang { 0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0} 10%{opacity:0.7} 50%{transform:translateY(-400px) translateX(var(--x)) rotate(360deg)} 100%{transform:translateY(-900px) translateX(calc(var(--x) * -1)) rotate(720deg); opacity:0} }
 @keyframes kedip{0%,100%{opacity:1;} 50%{opacity:0.7;}}
+
+/* POPUP IKLAN ALA SCREENSHOT LU */
+#popupIklan{background:linear-gradient(180deg, #ff8c00 0%, #ff4d00 100%)!important; z-index:9999;}
+#popupIklan.iklan-content{width:100%; height:100%; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px;}
+#popupIklan.btn-close-x{position:absolute; top:20px; right:20px; background:#fff; color:#000; width:45px; height:45px; border-radius:50%; border:0; font-weight:bold; font-size:20px; box-shadow:0 2px 10px rgba(0,0,0,0.3);}
+#popupIklan h2.judul-iklan{font-size:38px; font-weight:900; color:#fff; text-shadow: 3px 3px 0 #000, -1px -1px 0 #000; margin:20px 0 10px; letter-spacing:1px;}
+#popupIklan p.sub-judul{color:#fff; font-size:20px; font-weight:bold; margin:0 0 20px; text-align:center; line-height:1.3;}
+#popupIklan.box-hitam{width:95%; max-width:400px; height:400px; background:#000; border-radius:25px; overflow:hidden; position:relative; display:flex; justify-content:center; align-items:center;}
+#popupIklan.box-hitam iframe{width:100%; height:100%; border:0; background:#000;}
+#popupIklan.trivia{margin-top:20px; color:#fff; font-size:14px; opacity:0.9;}
+
 .admin-wd{border:1px solid lime; background:#000; padding:10px; margin:8px 0; border-radius:8px; text-align:left; font-size:12px;}
 .btn-selesai{background:lime; color:#000; border:0; padding:5px 10px; border-radius:5px; font-weight:bold; margin-top:5px;}
 </style>
@@ -66,6 +78,7 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 <script src="https://www.highrevenueformat.com/b49aa3abb3db1ef686ef5f66f405e13c/invoke.js"></script>
 </div>
 
+<button id="btnIklan" onclick="bukaIklan()">📺 NONTON IKLAN +1000</button><br>
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
 
 <div class="iklan-box2">
@@ -75,11 +88,27 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 <script src="https://www.highrevenueformat.com/878c248db350f1d5e3578b3fbc114c16/invoke.js"></script>
 </div>
 
+<!-- POPUP TUKAR DLL -->
 <div id="tukar" class="popup" onclick="hide('tukar')"><div class="box" onclick="event.stopPropagation()"><h2>💸 TUKAR SALDO 💸</h2><p style="color:gold; font-size:12px;">Minimal WD: 500.000 Koin</p><div id="listTukar"></div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('tukar')">TUTUP</button></div></div>
 <div id="riwayat" class="popup" onclick="hide('riwayat')"><div class="box" onclick="event.stopPropagation()"><h2>📜 RIWAYAT WD</h2><div id="list"></div><button class="btn-menu btn-batal" style="max-width:100%;" onclick="hide('riwayat')">TUTUP</button></div></div>
 <div id="admin" class="popup" onclick="hide('admin')"><div class="box" onclick="event.stopPropagation()"><h2>👑 PANEL ADMIN WD</h2><div id="listAdmin">Loading...</div><button class="btn-menu btn-batal" style="max-width:100%; margin-top:10px;" onclick="hide('admin')">TUTUP</button></div></div>
 <div id="struk" class="popup" onclick="hide('struk')"><div class="box" onclick="event.stopPropagation()"><h2>✅ BERHASIL</h2><div id="isistruk"></div><button class="btn-menu" style="max-width:100%;" onclick="hide('struk')">OK</button></div></div>
 <div id="konfirmasiLogout" class="popup" onclick="hide('konfirmasiLogout')"><div class="box" onclick="event.stopPropagation()"><h2>⚠️ YAKIN LOGOUT?</h2><p>Data koin aman tersimpan di cloud kok bree</p><div class="btn-group"><button class="btn-menu btn-batal" onclick="hide('konfirmasiLogout')">BATAL</button><button class="btn-menu btn-logout" onclick="prosesLogout()">LOGOUT</button></div></div></div>
+
+<!-- POPUP IKLAN BARU KEK SCREENSHOT -->
+<div id="popupIklan" class="popup" onclick="hide('popupIklan')">
+  <div class="iklan-content" onclick="event.stopPropagation()">
+    <button class="btn-close-x" onclick="hide('popupIklan')">X</button>
+    <h2 class="judul-iklan">KAMU TAHU?</h2>
+    <p class="sub-judul">Tonton iklan untuk dapat<br>1000 koin gratis</p>
+    <div class="box-hitam">
+      <iframe id="frameIklan" src="" loading="lazy"></iframe>
+    </div>
+    <div class="trivia" id="timerIklan">Memuat iklan... 10s</div>
+    <button id="btnKlaimIklan" class="btn-menu" style="background:#fff; color:#ff5500; margin-top:15px; display:none; max-width:320px;" onclick="klaimIklan()">KLAIM +1000 KOIN 💰</button>
+    <button class="btn-close-x" style="top:auto; bottom:20px; right:20px; position:fixed;" onclick="hide('popupIklan')">X</button>
+  </div>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -103,6 +132,7 @@ var hist = [];
 var autoSelesai = 0;
 var userId = null;
 var autoInterval = null;
+var timerIklanInterval = null;
 var ADMIN_EMAIL = "didin39scakep39@gmail.com";
 
 function formatKoin(angka){ return angka.toLocaleString('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}); }
@@ -185,6 +215,38 @@ function muncratAcak(){
   }
 }
 
+// ===== FITUR NONTON IKLAN BARU =====
+function bukaIklan(){
+  if(!userId){ alert('Login dulu bree!'); return; }
+  document.getElementById('frameIklan').src = 'https://omg10.com/4/11813928';
+  document.getElementById('btnKlaimIklan').style.display = 'none';
+  document.getElementById('popupIklan').style.display = 'flex';
+
+  var detik = 10;
+  document.getElementById('timerIklan').innerText = 'Tunggu ' + detik + 's untuk klaim...';
+  if(timerIklanInterval) clearInterval(timerIklanInterval);
+  timerIklanInterval = setInterval(function(){
+    detik--;
+    if(detik > 0){
+      document.getElementById('timerIklan').innerText = 'Tunggu ' + detik + 's untuk klaim... Trivia ' + (10-detik) + '/10';
+    } else {
+      clearInterval(timerIklanInterval);
+      document.getElementById('timerIklan').innerText = 'Selesai! Klaim hadiahmu';
+      document.getElementById('btnKlaimIklan').style.display = 'inline-block';
+    }
+  }, 1000);
+}
+
+function klaimIklan(){
+  koin = koin + 1000;
+  saveData(); updateUI();
+  hide('popupIklan');
+  document.getElementById('frameIklan').src = '';
+  alert('Mantap bree! +1000 koin masuk 💰');
+  muncratAcak(); muncratAcak();
+}
+// ===== END FITUR IKLAN =====
+
 function mulaiAuto(load, sisa){
   if(!userId){ alert('Login dulu bree!'); return; }
   if(autoInterval) return;
@@ -234,7 +296,13 @@ function show(id){
   if(id=='admin'){ loadAdminPanel(); }
   document.getElementById(id).style.display='flex';
 }
-function hide(id){document.getElementById(id).style.display='none';}
+function hide(id){
+  document.getElementById(id).style.display='none';
+  if(id=='popupIklan'){
+    document.getElementById('frameIklan').src = '';
+    if(timerIklanInterval) clearInterval(timerIklanInterval);
+  }
+}
 
 function tukar(menu,harga){
   if(!userId){ alert('Login dulu bree!'); return; }
