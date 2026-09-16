@@ -34,7 +34,6 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 .admin-wd{border:1px solid lime; background:#000; padding:10px; margin:8px 0; border-radius:8px; text-align:left; font-size:12px;}
 .btn-selesai{background:lime; color:#000; border:0; padding:5px 10px; border-radius:5px; font-weight:bold; margin-top:5px;}
 </style>
-<!-- SOCIAL BAR -->
 <script src="https://pl31365483.profitableratecpmnetwork.com/79/b3/2a/79b32a740afd2993e9ca65d1eb89785d.js"></script>
 </head>
 <body>
@@ -59,7 +58,6 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </div>
 <button class="btn-menu btn-admin" onclick="show('admin')">PANEL ADMIN</button>
 
-<!-- BANNER 300x250 -->
 <div class="iklan-box">
 <script>
   atOptions = {
@@ -75,7 +73,6 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
 
-<!-- BANNER 320x50 -->
 <div class="iklan-box2">
 <script>
   atOptions = {
@@ -152,8 +149,17 @@ function loadData(){
       koin = doc.data().koin || 0;
       hist = doc.data().hist || [];
       autoSelesai = doc.data().autoSelesai || 0;
+      var lastSave = doc.data().lastSave || 0;
       var sekarang = Date.now();
       if(autoSelesai > sekarang){
+        if(lastSave > 0){
+          var detikOffline = Math.floor((sekarang - lastSave) / 1000);
+          if(detikOffline > 0){
+            var sisaAuto = Math.floor((autoSelesai - lastSave) / 1000);
+            if(detikOffline > sisaAuto) detikOffline = sisaAuto;
+            koin = koin + detikOffline;
+          }
+        }
         var sisaDetik = Math.floor((autoSelesai - sekarang) / 1000);
         mulaiAuto(true, sisaDetik);
       }
@@ -164,7 +170,7 @@ function loadData(){
 
 function saveData(){
   if(!userId) return;
-  db.collection("users").doc(userId).set({koin: koin, hist: hist, autoSelesai: autoSelesai});
+  db.collection("users").doc(userId).set({koin: koin, hist: hist, autoSelesai: autoSelesai, lastSave: Date.now()});
 }
 
 function updateUI(){ document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin); }
