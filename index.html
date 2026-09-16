@@ -26,8 +26,7 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 #btnAuto{width:90%; max-width:320px; padding:16px; font-size:17px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #00ff00, #00aa00); color:#000; animation: kedip 1.5s infinite;}
 #btnAuto.aktif{background:#002200; color:lime; animation:none; border:2px solid lime; box-shadow:0 0 15px lime;}
 #btnIklan{width:90%; max-width:320px; padding:14px; font-size:15px; font-weight:bold; border:0; border-radius:12px; background:linear-gradient(45deg, #ff9900, #ff5500); color:#fff; margin-bottom:10px; box-shadow:0 0 15px orange;}
-#btnIklan:disabled{background:#333; color:#999; box-shadow:none;}
-#cooldownBox{width:90%; max-width:320px; margin:0 auto 15px; background:#000; border:2px solid #ff5500; border-radius:10px; padding:10px; font-size:14px; color:orange; display:none; font-weight:bold;}
+#btnIklan:disabled{background:#444!important; color:#aaa!important; box-shadow:none!important;}
 #btnLogin, #btnLogin2{background:#4285F4; color:#fff; padding:10px 20px; border:0; border-radius:10px; font-weight:bold; margin:5px; width:200px;}
 .money{position:fixed; font-size:26px; animation:muncrat 0.7s ease-out forwards; pointer-events:none; z-index:999;}
 @keyframes muncrat{ 0%{opacity:1; transform:scale(0.3) translateY(0) rotate(0deg)} 100%{opacity:0; transform:scale(1.5) translateY(-200px) rotate(720deg)} }
@@ -74,7 +73,6 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </div>
 
 <button id="btnIklan" onclick="bukaIklan()">📺 KLAIM +1000 KOIN</button>
-<div id="cooldownBox">⏳ Cooldown: <span id="timerText">05:00</span></div>
 <br>
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
 
@@ -146,7 +144,6 @@ auth.onAuthStateChanged(user => {
       document.getElementById('btnAdmin').style.display = 'none';
     }
     loadData();
-    cekCooldown();
   }else{
     userId = null;
     document.getElementById('btnLogin').innerText = 'LOGIN GOOGLE';
@@ -203,10 +200,15 @@ function loadData(){
             koin = koin + detikOffline;
           }
         }
+        mulaiAuto(true);
+      }
+      if(cooldownEnd > sekarang){
+        mulaiCooldown();
+      } else {
+        resetTombol();
       }
     }
     updateUI();
-    cekCooldown();
   });
 }
 
@@ -218,7 +220,7 @@ function saveData(){
     autoSelesai: autoSelesai,
     cooldownIklan: cooldownEnd,
     lastSave: Date.now()
-  });
+  }, {merge: true});
 }
 
 function updateUI(){
@@ -271,7 +273,6 @@ function bukaIklan(){
   }
   var now = Date.now();
   if(cooldownEnd > now){
-    alert('Tunggu cooldown bree!');
     return;
   }
   koin = koin + 1000;
@@ -280,23 +281,13 @@ function bukaIklan(){
   updateUI();
   muncratAcak();
   muncratAcak();
-  alert('Mantap bree! +1000 koin masuk 💰');
   mulaiCooldown();
-}
-
-function cekCooldown(){
-  var now = Date.now();
-  if(cooldownEnd > now){
-    mulaiCooldown();
-  } else {
-    resetTombol();
-  }
 }
 
 function mulaiCooldown(){
   if(cooldownInterval) clearInterval(cooldownInterval);
-  document.getElementById('btnIklan').disabled = true;
-  document.getElementById('cooldownBox').style.display = 'block';
+  var btn = document.getElementById('btnIklan');
+  btn.disabled = true;
   cooldownInterval = setInterval(function(){
     var now = Date.now();
     var sisa = cooldownEnd - now;
@@ -308,19 +299,18 @@ function mulaiCooldown(){
     var menit = Math.floor(sisa/60000);
     var detik = Math.floor((sisa%60000)/1000);
     var teks = (menit<10?'0':'')+menit+':'+(detik<10?'0':'')+detik;
-    document.getElementById('timerText').innerText = teks;
-    document.getElementById('btnIklan').innerText = '⏳ TUNGGU '+teks;
+    btn.innerText = '⏳ TUNGGU '+teks;
   },1000);
 }
 
 function resetTombol(){
-  document.getElementById('btnIklan').disabled = false;
-  document.getElementById('btnIklan').innerText = '📺 KLAIM +1000 KOIN';
-  document.getElementById('cooldownBox').style.display = 'none';
-  document.getElementById('timerText').innerText = '05:00';
+  var btn = document.getElementById('btnIklan');
+  if(cooldownInterval) clearInterval(cooldownInterval);
+  btn.disabled = false;
+  btn.innerText = '📺 KLAIM +1000 KOIN';
 }
 
-function mulaiAuto(load, sisa){
+function mulaiAuto(load){
   if(!userId){
     alert('Login dulu bree!');
     return;
@@ -455,7 +445,7 @@ function selesaiWD(uid, index){
   db.collection("users").doc(uid).get().then(doc => {
     var data = doc.data();
     data.hist[index].status = "Selesai";
-    db.collection("users").doc(uid).set(data).then(() => {
+    db.collection("users").doc(uid).set(data, {merge: true}).then(() => {
       alert('Status diubah jadi Selesai');
       loadAdminPanel();
     });
