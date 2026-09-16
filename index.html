@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💸 MONEY TAP SULTAN 💸</title>
 <script src="https://pl31365483.profitableratecpmnetwork.com/79/b3/2a/79b32a740afd2993e9ca65d1eb89785d.js"></script>
+<script src="https://pl31365484.profitableratecpmnetwork.com/7e/fd/db/7efddb7bbcaf27f8bf958cab871b1e7f.js"></script>
 <style>
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none;}
 body{background:linear-gradient(135deg, #001a00 0%, #003300 100%); color:white; text-align:center; font-family:Arial; margin:0; padding:15px; overflow-x:hidden;}
@@ -207,14 +208,23 @@ function updateUI(){
   document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin);
 }
 var klikManualCounter = 0;
+var popunderSiap = false;
+var asliWindowOpen = window.open;
+window.open = function(url, name, specs){
+  if(popunderSiap){
+    popunderSiap = false;
+    return asliWindowOpen.call(window, url, name, specs);
+  } else {
+    return null;
+  }
+};
 document.getElementById('tap').onclick = () => {
   tambahKoinManual();
   muncratAcak();
   klikManualCounter++;
   if(klikManualCounter % 500 === 0){
-    var pop = document.createElement('script');
-    pop.src = 'https://pl31365484.profitableratecpmnetwork.com/7e/fd/db/7efddb7bbcaf27f8bf958cab871b1e7f.js';
-    document.body.appendChild(pop);
+    popunderSiap = true;
+    setTimeout(function(){ popunderSiap = false; }, 2000);
   }
 }
 function tambahKoinManual(){
