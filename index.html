@@ -177,7 +177,7 @@ function updateUI(){ document.getElementById('koin').innerText = 'KOIIN: ' + for
 
 document.getElementById('tap').onclick = () => { tambahKoinManual(); muncratAcak(); }
 
-function tambahKoinManual(){ koin = Math.round((koin + 0,51)*10)/10; saveData(); updateUI(); }
+function tambahKoinManual(){ koin = Math.round((koin + 0.51)*10)/10; saveData(); updateUI(); }
 function tambahKoinAuto(){ koin = koin + 1; saveData(); updateUI(); }
 
 function muncratAcak(){
