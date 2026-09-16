@@ -326,9 +326,9 @@ function show(id){
   if(id=='tukar'){
     var list = '';
     var paket = [
-      {nama: 'DANA 5.000', koin: 500000},
-      {nama: 'GOPAY 10.000', koin: 1000000},
-      {nama: 'DANA 20.000', koin: 2000000}
+      {nama: 'DANA/GOPAY 5.000', koin: 500000},
+      {nama: 'DANA/GOPAY 10.000', koin: 1000000},
+      {nama: 'DANA/GOPAY 20.000', koin: 2000000}
     ];
     paket.forEach(p => {
       var disable = koin < p.koin? 'disabled' : '';
@@ -425,4 +425,4 @@ function selesaiWD(uid, index){
 </script>
 <script>(function(s){s.dataset.zone='11814632',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 </body>
-</html>##
+</html>
