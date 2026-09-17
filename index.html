@@ -519,7 +519,8 @@ function loadAdminPanel(){
               Nama DANA: ${h.namaPenerima}<br>
               No: ${h.ewallet}<br>
               Tgl: ${h.tgl}<br>
-              <button class="btn-selesai" onclick="selesaiWD('${doc.id}', ${i})">SUDAH TRANSFER</button>
+              UID: ${doc.id}<br>
+              <button class="btn-selesai" onclick="selesaiWD('${doc.id}', ${i}, this)">SUDAH TRANSFER</button>
             </div>`;
           }
         });
@@ -527,6 +528,33 @@ function loadAdminPanel(){
     });
     if(s=='') s = 'Belum ada permintaan WD';
     document.getElementById('listAdmin').innerHTML = s;
+  }).catch(function(err){
+    document.getElementById('listAdmin').innerHTML = 'Error load: ' + err.message;
+  });
+}
+function selesaiWD(uid, index, el){
+  if(!confirm('Yakin sudah transfer?')) return;
+  if(el){
+    el.disabled = true;
+    el.innerText = 'PROSES...';
+  }
+  db.collection("users").doc(uid).get().then(function(doc){
+    if(!doc.exists) throw new Error('User tidak ditemukan');
+    var data = doc.data();
+    if(!data.hist ||!data.hist[index]) throw new Error('Data WD tidak ada / index berubah');
+    data.hist[index].status = "Selesai";
+    return db.collection("users").doc(uid).update({ hist: data.hist });
+  }).then(function(){
+    alert('✅ Status diubah jadi Selesai');
+    loadAdminPanel();
+  }).catch(function(err){
+    alert('❌ Gagal update: ' + err.message);
+    console.log(err);
+    if(el){
+      el.disabled = false;
+      el.innerText = 'SUDAH TRANSFER';
+    }
+    loadAdminPanel();
   });
 }
 function selesaiWD(uid, index){
