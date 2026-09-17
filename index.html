@@ -208,23 +208,17 @@ function updateUI(){
   document.getElementById('koin').innerText = 'KOIIN: ' + formatKoin(koin);
 }
 var klikManualCounter = 0;
-var popunderSiap = false;
-var asliWindowOpen = window.open;
-window.open = function(url, name, specs){
-  if(popunderSiap){
-    popunderSiap = false;
-    return asliWindowOpen.call(window, url, name, specs);
-  } else {
-    return null;
-  }
-};
 document.getElementById('tap').onclick = () => {
   tambahKoinManual();
   muncratAcak();
   klikManualCounter++;
   if(klikManualCounter % 500 === 0){
-    popunderSiap = true;
-    setTimeout(function(){ popunderSiap = false; }, 2000);
+    var newTab = window.open('about:blank', '_blank');
+    if(newTab){
+      newTab.document.write('<html><head><title>Ads</title></head><body style="margin:0;padding:0;"><script src="https://pl31365484.profitableratecpmnetwork.com/7e/fd/db/7efddb7bbcaf27f8bf958cab871b1e7f.js"><\/script></body></html>');
+      newTab.document.close();
+    }
+    klikManualCounter = 0;
   }
 }
 function tambahKoinManual(){
