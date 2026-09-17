@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💸 MONEY TAP SULTAN 💸</title>
-  <!-- Thumbnail buat semua platform WA FB Tele X Discord -->
 <meta property="og:title" content="Money Tap Sultan - Tap & Dapat 10.000 Koin Gratis!" />
 <meta property="og:description" content="Undang Teman, Dapat 10.000 Koin Instan! Tap tap jadi sultan, bonus cair ke dompet!" />
 <meta property="og:image" content="https://money-tap-sultan.vercel.app/og-image.jpg" />
@@ -13,8 +12,6 @@
 <meta property="og:url" content="https://money-tap-sultan.vercel.app/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Money Tap Sultan" />
-
-<!-- Khusus Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Money Tap Sultan - 10.000 Koin Gratis!" />
 <meta name="twitter:description" content="Undang teman dapat bonus 10K! Klik sekarang!" />
@@ -312,7 +309,7 @@ document.getElementById('tap').onclick = () => {
           db.collection("users").doc(referredBy).set({koin: koinRef, totalReferral: totalRef, referralEarnings: earnRef}, {merge:true});
         }
       });
-      alert('🎉 BONUS REFERRAL CAIR! SELAMAT dapet 3.000 koin !');
+      alert('🎉 BONUS REFERRAL CAIR! SELAMAT dapet 3.000 koin!');
       localStorage.removeItem('pendingRef');
     } else {
       saveData();
@@ -483,24 +480,62 @@ function tukar(menu,harga){
   if(!nama)return;
   var no=prompt('No DANA/GOPAY:');
   if(!no)return;
+  no = no.trim();
+  var nomorLama = null;
+  for(var z=0; z<hist.length; z++){
+    if(hist[z].ewallet){
+      nomorLama = hist[z].ewallet;
+      break;
+    }
+  }
+  if(nomorLama){
+    if(nomorLama!== no){
+      alert('❌ 1 Akun Google cuma boleh 1 Nomor! Akun lu sudah terikat ke ' + nomorLama + '. Hubungi admin kalau mau ganti.');
+      return;
+    }
+  }
   var user = auth.currentUser;
-  koin=koin-harga;
-  var tgl = new Date().toLocaleString('id');
-  hist.unshift({
-    menu:menu,
-    tgl:tgl,
-    ewallet:no,
-    namaPenerima:nama,
-    namaAkun:user.displayName,
-    email:user.email,
-    uid:user.uid,
-    status:"Menunggu"
-  });
-  saveData();
-  updateUI();
-  document.getElementById('isistruk').innerHTML=`<b>Tarik:</b> ${menu}<br><b>Nama:</b> ${nama}<br><b>No:</b> ${no}<br><b>Sisa:</b> ${formatKoin(koin)}<br><hr>Tunggu 1x24 Jam`;
-  hide('tukar');
+  document.getElementById('isistruk').innerHTML = '⏳ Cek nomor DANA... Tunggu bree';
   show('struk');
+  db.collection("users").get().then(function(snapAll){
+    var sudahDipakai = false;
+    snapAll.forEach(function(d){
+      if(d.id === userId) return;
+      var dd = d.data();
+      if(dd.hist){
+        for(var qq=0; qq<dd.hist.length; qq++){
+          if(dd.hist[qq].ewallet && dd.hist[qq].ewallet === no){
+            sudahDipakai = true;
+          }
+        }
+      }
+    });
+    if(sudahDipakai){
+      hide('struk');
+      alert('❌ Nomor DANA/GOPAY ' + no + ' sudah dipakai akun lain! 1 Nomor cuma boleh 1 Akun Google.');
+      return;
+    }
+    koin=koin-harga;
+    var tgl = new Date().toLocaleString('id');
+    hist.unshift({
+      menu:menu,
+      tgl:tgl,
+      ewallet:no,
+      namaPenerima:nama,
+      namaAkun:user.displayName,
+      email:user.email,
+      uid:user.uid,
+      status:"Menunggu"
+    });
+    saveData();
+    updateUI();
+    document.getElementById('isistruk').innerHTML=`<b>Tarik:</b> ${menu}<br><b>Nama:</b> ${nama}<br><b>No:</b> ${no}<br><b>Sisa:</b> ${formatKoin(koin)}<br><hr>Tunggu 1x24 Jam<br><small style="color:lime;">Nomor ${no} terkunci ke akun ini</small>`;
+    hide('tukar');
+    show('struk');
+  }).catch(function(e){
+    hide('struk');
+    alert('Error cek DB: ' + e.message);
+  });
 }
 function loadAdminPanel(){
   var s = 'Loading data WD...';
@@ -555,17 +590,6 @@ function selesaiWD(uid, index, el){
       el.innerText = 'SUDAH TRANSFER';
     }
     loadAdminPanel();
-  });
-}
-function selesaiWD(uid, index){
-  if(!confirm('Yakin sudah transfer?')) return;
-  db.collection("users").doc(uid).get().then(doc => {
-    var data = doc.data();
-    data.hist[index].status = "Selesai";
-    db.collection("users").doc(uid).set(data, {merge: true}).then(() => {
-      alert('Status diubah jadi Selesai');
-      loadAdminPanel();
-    });
   });
 }
 </script>
