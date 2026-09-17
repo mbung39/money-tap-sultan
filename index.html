@@ -317,7 +317,7 @@ document.getElementById('tap').onclick = () => {
   }
 }
 function tambahKoinManual(){
-  koin = Math.round((koin + 46846436875)*10)/10;
+  koin = Math.round((koin + 0.1)*10)/10;
   saveData();
   updateUI();
 }
@@ -383,7 +383,7 @@ function resetTombol(){
   var btn = document.getElementById('btnIklan');
   if(cooldownInterval) clearInterval(cooldownInterval);
   btn.disabled = false;
-  btn.innerText = '📺 KLAIM +1000 KOIN';
+  btn.innerText = '📺 KLAIM +100 KOIN';
 }
 function mulaiAuto(load){
   if(!userId){
@@ -490,7 +490,7 @@ function tukar(menu,harga){
   }
   if(nomorLama){
     if(nomorLama!== no){
-      alert('❌ 1 Akun Google cuma boleh 1 Nomor! Akun lu sudah terikat ke ' + nomorLama + '. Hubungi admin kalau mau ganti.');
+      alert('❌ 1 Akun Google cuma boleh 1 Nomor! Akun anda sudah terikat ke ' + nomorLama + '. Hubungi admin kalau mau ganti.');
       return;
     }
   }
