@@ -72,7 +72,7 @@ h1{color:gold; text-shadow:0 0 10px gold; margin:5px; font-size:20px;}
 </script>
 <script src="https://www.highrevenueformat.com/b49aa3abb3db1ef686ef5f66f405e13c/invoke.js"></script>
 </div>
-<button id="btnIklan" onclick="bukaIklan()">📺 KLAIM +1000 KOIN</button>
+<button id="btnIklan" onclick="bukaIklan()">📺 KLAIM +100 KOIN</button>
 <br>
 <button id="btnAuto" onclick="mulaiAuto()">AKTIFKAN AUTO KLIK 1 JAM</button>
 <div class="iklan-box2">
@@ -342,8 +342,8 @@ function bukaIklan(){
   if(cooldownEnd > now){
     return;
   }
-  koin = koin + 1000;
-  cooldownEnd = now + (5*60*1000);
+  koin = koin + 100;
+  cooldownEnd = now + (10*60*1000);
   saveData();
   updateUI();
   muncratAcak();
