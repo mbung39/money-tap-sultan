@@ -439,7 +439,7 @@ function show(id){
     var info = `UID Lu: ${userId}<br>Total Teman Diundang: ${totalReferral} orang<br>Total Bonus Ref: ${formatKoin(referralEarnings)} koin<br>`;
     if(referredBy){ info += `<br>Lu diundang oleh: ${referredBy}<br>Status Bonus: ${hasClaimedRefBonus? 'Sudah Cair 3.000' : 'Klik ${100-klikUntukBonusRef}x lagi buat cair 3.000'}`; } else { info += '<br>Belum pake kode referral orang lain'; }
     document.getElementById('infoRef').innerHTML = info;
-    document.getElementById('listRef').innerHTML = '<small style="color:#aaa;">Data referral kesimpen di Firebase users/'+userId+'</small>';
+    document.getElementById('listRef').innerHTML = '<small style="color:#aaa;">Data referral tersimpan/'+userId+'</small>';
   }
   if(id=='admin'){
     loadAdminPanel();
